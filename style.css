@@ -7,19 +7,33 @@
     0.7px 1.4px 1.6px -1.1px hsl(var(--shadow-color) / 0.42),
     1.9px 3.9px 4.4px -2.2px hsl(var(--shadow-color) / 0.36),
     5px 10px 11.3px -3.2px hsl(var(--shadow-color) / 0.31);
+  --shadow-elevation-high: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.25),
+    1.2px 2.3px 2.9px -0.4px hsl(var(--shadow-color) / 0.25),
+    2.1px 4.2px 5.3px -0.7px hsl(var(--shadow-color) / 0.25),
+    3.4px 6.8px 8.6px -1.1px hsl(var(--shadow-color) / 0.25),
+    5.4px 10.8px 13.6px -1.4px hsl(var(--shadow-color) / 0.25),
+    8.4px 16.8px 21.1px -1.8px hsl(var(--shadow-color) / 0.25),
+    12.7px 25.5px 32px -2.1px hsl(var(--shadow-color) / 0.25),
+    18.8px 37.5px 47.2px -2.5px hsl(var(--shadow-color) / 0.25);
 
   --site-bg-gradient: linear-gradient(#f5f7fb, #c7d1e4);
-  --grass: linear-gradient(155deg, #5cdab6, #209272);
 
   --text-color: #f5f7fb;
 
-  --fire: #f8545a;
-  --water: #f8545a;
-  --ground: #977959;
-  --normal: #bfbab3;
-  --poison: #9858b0;
-  --bug: #4e9852;
-  --fairy: #c351ac;
+  --fire: linear-gradient(155deg, #f8545a, #c43237);
+  --grass: linear-gradient(155deg, #5cdab6, #209272);
+  --electric: linear-gradient(155deg, #fed15d, #eab01f);
+  --water: linear-gradient(155deg, #81bdff, #5298e2);
+  --ground: linear-gradient(155deg, #977959, #826445);
+  --rock: linear-gradient(155deg, #dfe7ed, #c7d2db);
+  --fairy: linear-gradient(155deg, #e18bd0, #dd55c2);
+  --poison: linear-gradient(155deg, #9858b0, #843b9e);
+  --bug: linear-gradient(155deg, #83b985, #56a158);
+  --dragon: linear-gradient(155deg, #ffbe81, #f39135);
+  --psychic: linear-gradient(155deg, #ff62dd, #ec21c0);
+  --flying: linear-gradient(155deg, #abdfff, #47b3f7);
+  --flying: linear-gradient(155deg, #f37944, #e34e0f);
+  --normal: linear-gradient(155deg, #bfbab3, #96918b);
 }
 
 * {
@@ -27,16 +41,14 @@
 }
 
 .test {
-  color: #31be96;
-  color: #209272;
-  color: #f8545a;
-  color: #81bdff;
-  color: #fed15d;
-  color: #bfbab3;
-  color: #977959;
-  color: #9858b0;
-  color: #c351ac;
-  color: #4e9852;
+  background: linear-gradient(155deg, #f8545a, #c43237);
+  background: linear-gradient(155deg, #81bdff, #5298e2);
+  background: linear-gradient(155deg, #fed15d, #eab01f);
+  background: linear-gradient(155deg, #bfbab3, #96918b);
+  background: linear-gradient(155deg, #977959, #826445);
+  background: linear-gradient(155deg, #9858b0, #843b9e);
+  background: linear-gradient(155deg, #e18bd0, #dd55c2);
+  background: linear-gradient(155deg, #83b985, #56a158);
   color: #ffffff26;
 }
 
@@ -56,8 +68,9 @@ body {
 h1 {
   letter-spacing: 0.035rem;
   color: #061423;
-  font-weight: 900;
-  text-shadow: 0 1px 6px rgba(100, 100, 100, 0.35);
+  font-family: 'Pokemon Hollow', sans-serif;
+  font-size: 3.5rem;
+  text-shadow: 0 1px 8px #c7d1e4;
 }
 
 h3 {
@@ -73,7 +86,7 @@ h3 {
   max-width: 1200px;
 }
 
-.pokemon {
+.pokemon-tile {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -82,14 +95,20 @@ h3 {
   background: var(--grass);
   border-radius: 1rem;
   margin: 0.5rem;
-  padding: 1.25rem 0.5rem 0.25rem 1.25rem;
+  padding: 1.25rem 0rem 1.25rem 1.25rem;
   text-align: center;
   color: var(--text-color);
   box-shadow: var(--shadow-elevation-medium);
   overflow: hidden;
+  transition: all ease-in-out 0.25s;
 }
 
-.pokemon::before {
+.pokemon-tile:hover {
+  box-shadow: var(--shadow-elevation-high);
+  z-index: 2;
+}
+
+.pokemon-tile::before {
   content: '';
   position: absolute;
   top: 0;
@@ -103,13 +122,13 @@ h3 {
   z-index: 0;
 }
 
-.pokemon .img-container {
+.pokemon-tile .img-container {
   display: flex;
   justify-content: end;
   align-items: end;
 }
 
-.pokemon .number {
+.pokemon-tile .number {
   width: 100%;
   padding-right: 0.5rem;
   text-align: right;
@@ -126,13 +145,13 @@ h3 {
   z-index: 10;
 }
 
-.pokemon .name {
+.pokemon-tile .name {
   font-size: 1.125rem;
   font-weight: 900;
   letter-spacing: 1px;
 }
 
-.pokemon button {
+.pokemon-tile button {
   background-color: rgba(255, 255, 255, 0.25);
   margin-bottom: 0.35rem;
   padding: 0.4rem 0.8rem;
@@ -146,9 +165,10 @@ h3 {
   box-shadow: var(--type-pledge-shadow);
 }
 
-.pokemon .img-container img {
-  max-width: 100%;
-  margin-top: 1.5rem;
+.pokemon-tile .img-container img {
+  max-width: 87.5%;
+  /* margin-top: 1.5rem; */
+  transition: all ease-in-out 0.125s;
 }
 
 .background-symbol {
