@@ -19,25 +19,40 @@
   --site-bg-gradient: linear-gradient(#f5f7fb, #c7d1e4);
 
   --text-color: #f5f7fb;
+  --btn: linear-gradient(155deg, #95b2e8, #667eab);
+  --btn-hover: linear-gradient(155deg, #6193ee, #265abc);
+  --btn-active: linear-gradient(155deg, #265abc, #265abc);
 
-  --fire: linear-gradient(155deg, #f8545a, #c43237);
-  --grass: linear-gradient(155deg, #5cdab6, #209272);
-  --electric: linear-gradient(155deg, #fed15d, #eab01f);
-  --water: linear-gradient(155deg, #81bdff, #5298e2);
-  --ground: linear-gradient(155deg, #977959, #826445);
-  --rock: linear-gradient(155deg, #dfe7ed, #c7d2db);
-  --fairy: linear-gradient(155deg, #e18bd0, #dd55c2);
-  --poison: linear-gradient(155deg, #9858b0, #843b9e);
-  --bug: linear-gradient(155deg, #83b985, #56a158);
-  --dragon: linear-gradient(155deg, #ffbe81, #f39135);
-  --psychic: linear-gradient(155deg, #ff62dd, #ec21c0);
+  --fire: linear-gradient(155deg, #fe8c90, #c43237);
+  --bug: linear-gradient(155deg, #5cdab6, #209272);
+  --electric: linear-gradient(155deg, #f3c246, #b48307);
+  --water: linear-gradient(155deg, #a2cfff, #5298e2);
+  --ground: linear-gradient(155deg, #cbc5bf, #817970);
+  --rock: linear-gradient(155deg, #afb7bc, #6d6f70);
+  --steel: linear-gradient(155deg, #c7d0d7, #8c959d);
+  --fairy: linear-gradient(155deg, #edbde4, #dd87cb);
+  --poison: linear-gradient(155deg, #b18bc0, #843b9e);
+  --grass: linear-gradient(155deg, #aac3ab, #449547);
+  --dragon: linear-gradient(155deg, #dcc0a2, #ffa44f);
+  --psychic: linear-gradient(155deg, #f497e0, #d455b8);
   --flying: linear-gradient(155deg, #abdfff, #47b3f7);
-  --flying: linear-gradient(155deg, #f37944, #e34e0f);
-  --normal: linear-gradient(155deg, #bfbab3, #96918b);
+  --fighting: linear-gradient(155deg, #e8a68a, #e34e0f);
+  --ghost: linear-gradient(155deg, #777a98, #213143);
+  --ice: linear-gradient(155deg, #c4d6eb, #9db8d7);
+  --dark: linear-gradient(155deg, #7b7ba3, #2b1e50);
+  --normal: linear-gradient(155deg, #c1ad94, #736655);
 }
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.d-none {
+  display: none;
 }
 
 .test {
@@ -48,8 +63,8 @@
   background: linear-gradient(155deg, #977959, #826445);
   background: linear-gradient(155deg, #9858b0, #843b9e);
   background: linear-gradient(155deg, #e18bd0, #dd55c2);
-  background: linear-gradient(155deg, #83b985, #56a158);
-  color: #ffffff26;
+  background: linear-gradient(155deg, #83b985, #366c38);
+  color: #ffffffa6;
 }
 
 body {
@@ -67,7 +82,7 @@ body {
 
 h1 {
   letter-spacing: 0.035rem;
-  color: #061423;
+  color: #425a74;
   font-family: 'Pokemon Hollow', sans-serif;
   font-size: 3.5rem;
   text-shadow: 0 1px 8px #c7d1e4;
@@ -92,7 +107,6 @@ h3 {
   flex-direction: column;
   width: 240px;
   height: 180px;
-  background: var(--grass);
   border-radius: 1rem;
   margin: 0.5rem;
   padding: 1.25rem 0rem 1.25rem 1.25rem;
@@ -100,6 +114,7 @@ h3 {
   color: var(--text-color);
   box-shadow: var(--shadow-elevation-medium);
   overflow: hidden;
+  cursor: pointer;
   transition: all ease-in-out 0.25s;
 }
 
@@ -149,6 +164,7 @@ h3 {
   font-size: 1.125rem;
   font-weight: 900;
   letter-spacing: 1px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.125);
 }
 
 .pokemon-tile button {
@@ -166,8 +182,8 @@ h3 {
 }
 
 .pokemon-tile .img-container img {
-  max-width: 87.5%;
-  /* margin-top: 1.5rem; */
+  max-width: 100%;
+  margin-top: 0.75rem;
   transition: all ease-in-out 0.125s;
 }
 
@@ -185,10 +201,95 @@ h3 {
 .info {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   align-items: start;
 }
 
-.info,
-.pokemon .img-container {
-  width: 50%;
+.img-container {
+  width: 57.5%;
+}
+
+.load-btn {
+  background: var(--btn);
+  margin-bottom: 0.35rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: 2rem;
+  border: none;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-color);
+  text-align: center;
+  vertical-align: middle;
+  box-shadow: var(--shadow-elevation-medium);
+  margin: 2rem 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.125);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.1s ease-in-out;
+}
+
+.load-btn:hover {
+  outline: solid var(--text-color) 0.5px;
+}
+
+.load-btn:active {
+  outline: solid var(--text-color) 3px;
+  color: white;
+}
+
+@keyframes spinnerFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.65;
+  }
+}
+
+@keyframes spinnerFadeOut {
+  from {
+    opacity: 0.65;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+#spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+  opacity: 0.65;
+}
+
+#spinner svg {
+  width: clamp(15rem, 8.929vw + 12.143rem, 25rem);
+  height: clamp(15rem, 8.929vw + 12.143rem, 25rem);
+  filter: drop-shadow(0 4px 4px #00000035);
+}
+
+.spinning {
+  animation: spinnerFadeIn 0.15s ease;
+}
+
+.no-spinning {
+  animation: spinnerFadeOut 0.15s ease;
+}
+
+.to-top svg {
+  position: fixed;
+  bottom: 2.5%;
+  right: 2.5%;
+  width: 48px;
+  height: 48px;
+  filter: invert(43%) sepia(69%) saturate(231%) hue-rotate(180deg)
+    brightness(100%) contrast(95%)
+    drop-shadow(1px 2px 4px rgba(1, 11, 29, 0.35));
+  transition: all 0.125s ease-in-out;
+}
+
+.to-top svg:active {
+  filter: invert(100%) drop-shadow(1px 2px 4px rgba(1, 11, 29, 0.35));
 }
