@@ -51,6 +51,11 @@ html {
   scroll-behavior: smooth;
 }
 
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .d-none {
   display: none;
 }
@@ -86,10 +91,6 @@ h1 {
   font-family: 'Pokemon Hollow', sans-serif;
   font-size: 3.5rem;
   text-shadow: 0 1px 8px #c7d1e4;
-}
-
-h3 {
-  margin: 0 0 0.65rem;
 }
 
 .poke-container {
@@ -143,14 +144,6 @@ h3 {
   align-items: end;
 }
 
-.pokemon-tile .number {
-  width: 100%;
-  padding-right: 0.5rem;
-  text-align: right;
-  font-weight: 900;
-  color: rgba(0, 0, 0, 0.15);
-}
-
 .pokemon-content {
   display: flex;
   justify-content: space-between;
@@ -158,6 +151,14 @@ h3 {
   width: 100%;
   flex-grow: 50%;
   z-index: 10;
+}
+
+.pokemon-tile .number {
+  width: 100%;
+  padding-right: 0.5rem;
+  text-align: right;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.15);
 }
 
 .pokemon-tile .name {
@@ -168,6 +169,7 @@ h3 {
 }
 
 .pokemon-tile button {
+  width: fit-content;
   background-color: rgba(255, 255, 255, 0.25);
   margin-bottom: 0.35rem;
   padding: 0.4rem 0.8rem;
@@ -178,7 +180,6 @@ h3 {
   color: var(--text-color);
   text-align: center;
   vertical-align: middle;
-  box-shadow: var(--type-pledge-shadow);
 }
 
 .pokemon-tile .img-container img {
@@ -260,7 +261,7 @@ h3 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 99;
+  z-index: 33;
   opacity: 0.65;
 }
 
@@ -291,5 +292,216 @@ h3 {
 }
 
 .to-top svg:active {
-  filter: invert(100%) drop-shadow(1px 2px 4px rgba(1, 11, 29, 0.35));
+  filter: invert(100%) sepia(50%) saturate(0%) hue-rotate(271deg)
+    brightness(108%) contrast(101%)
+    drop-shadow(1px 2px 4px rgba(1, 11, 29, 0.35));
+}
+
+.pokemon-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--grass);
+  width: 320px;
+  aspect-ratio: 1 / 2.25;
+  border-radius: 1rem;
+  text-align: center;
+  color: var(--text-color);
+  box-shadow: var(--shadow-elevation-high);
+  overflow: hidden;
+  transition: all ease-in-out 0.25s;
+}
+
+.pokemon-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url(img/pokeball-fade.png);
+  background-size: 56%;
+  background-repeat: no-repeat;
+  background-position: top 9.5rem right -2.5rem;
+  z-index: 0;
+}
+
+.card-header {
+  height: 4rem;
+}
+
+.card-info {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  margin: 0 1.25rem;
+}
+
+.card-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url(img/pattern-op-15.png);
+  background-size: 25%;
+  background-repeat: no-repeat;
+  background-position: top 11rem left 2.5rem;
+  z-index: 0;
+}
+
+span.card-name {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-color);
+  letter-spacing: 1px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.125);
+  margin: 0 0 0.65rem;
+}
+
+.card-number {
+  width: 100%;
+  padding-right: 0.5rem;
+  text-align: right;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.15);
+  margin-top: 0.85rem;
+}
+
+.card-type-btn {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0 1.25rem;
+}
+
+.card-type-btn button {
+  width: fit-content;
+  background-color: rgba(255, 255, 255, 0.25);
+  margin-bottom: 0.35rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 16px;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-color);
+  text-align: center;
+  vertical-align: middle;
+}
+
+.card-img-container {
+  position: absolute;
+  z-index: 99;
+  top: 8.5rem;
+  width: 100%;
+}
+
+.card-img-container img {
+  max-width: 66%;
+}
+
+.poke-stats {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 60%;
+  padding: 1.25rem 1.125rem 0.75rem;
+  flex-grow: 1;
+  width: 100%;
+  height: 85.5%;
+  background-color: rgba(255, 255, 255, 0.925);
+  border-radius: 1.5rem 1.5rem 0 0;
+  z-index: 66;
+  overflow: hidden;
+}
+
+.description {
+  width: 100%;
+  background: var(--grass);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: start;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.025);
+}
+
+.stat-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 2.75rem;
+  margin-top: 1rem;
+}
+
+.stat-nav a {
+  color: rgba(66, 90, 116, 0.45);
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: transparent;
+  border-bottom: solid 2px transparent;
+  transition: all 0.125s ease-in-out;
+}
+
+.stat-nav a:hover {
+  color: rgba(66, 90, 116, 0.95);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.125);
+  border-bottom: solid 2px rgba(66, 90, 116, 0.85);
+}
+
+.info-tab {
+  color: black;
+  height: 100%;
+}
+
+.info-tab table {
+  padding-top: 0.5rem;
+  border-spacing: 0px 12px;
+  width: 100%;
+  height: fit-content;
+  border-top: rgba(66, 90, 116, 0.125) 1px solid;
+}
+
+.info-tab td {
+  width: max-content;
+  margin-bottom: 0.5rem;
+  vertical-align: text-top;
+}
+
+.info-tab tr {
+  margin-bottom: 0.5rem;
+}
+
+.detail-label {
+  color: rgba(66, 90, 116, 0.65);
+  font-size: 1rem;
+  text-align: left;
+  font-weight: 500;
+}
+
+.detail-value {
+  text-align: left;
+  color: rgba(66, 90, 116, 0.85);
+  font-weight: 500;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.125);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.card-footer svg {
+  cursor: pointer;
+  filter: brightness(150%) saturate(80%)
+    drop-shadow(1px 2px 4px rgba(1, 11, 29, 0.35));
+  transition: all 0.15s ease-in-out;
+}
+
+.card-footer svg:hover {
+  filter: brightness(100%) saturate(100%)
+    drop-shadow(1px 2px 4px rgba(1, 11, 29, 0.35));
 }
