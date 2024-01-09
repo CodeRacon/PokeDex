@@ -24,10 +24,10 @@ let id = 0;
 let isLoading = false;
 
 async function init() {
-  for (let i = 1; i <= 24; i++) {
-    await fetchPokeData(id + i);
-  }
-  renderPokemonTile(pokemonData);
+  // for (let i = 1; i <= 24; i++) {
+  //   await fetchPokeData(id + i);
+  // }
+  // renderPokemonTile(pokemonData);
 }
 
 async function loadMore() {
@@ -48,18 +48,22 @@ async function loadMore() {
 
 async function fetchPokeData(id) {
   let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+
   let response = await fetch(url);
-  let fetchedPokeData = await response.json();
-  let pokeID = fetchedPokeData['id'].toString().padStart(4, '0');
-  let pokeName = capFirstLetter(fetchedPokeData['species']['name']);
-  let pokeTypes = fetchedPokeData['types'].map((type) =>
+  let fetchedData = await response.json();
+  let pokeID = fetchedData['id'].toString().padStart(4, '0');
+  let pokeName = capFirstLetter(fetchedData['species']['name']);
+  let pokeHeight = fetchedData['height'] / 10; // in meters
+  let pokeWeight = fetchedData['weight'] / 10; // in kilogramm
+
+  let pokeTypes = fetchedData['types'].map((type) =>
     capFirstLetter(type.type.name)
   );
-  let pokeAbilities = fetchedPokeData['abilities'].map((ability) =>
+  let pokeAbilities = fetchedData['abilities'].map((ability) =>
     capFirstLetter(ability.ability.name)
   );
   let pokeSprite =
-    fetchedPokeData['sprites']['other']['official-artwork']['front_default'];
+    fetchedData['sprites']['other']['official-artwork']['front_default'];
   let currentPokemon = {
     id: pokeID,
     name: pokeName,
@@ -68,6 +72,23 @@ async function fetchPokeData(id) {
     sprite: pokeSprite,
   };
   pokemonData.push(currentPokemon);
+}
+
+async function fetchPokeDetails() {
+  let url = `https://pokeapi.co/api/v2/pokemon-species/4/`;
+
+  let response = await fetch(url);
+  let fetchedDetail = await response.json();
+
+  let pokeGenus = fetchedDetail['genera'][7].genus;
+
+  let pokeAbout = fetchedDetail['flavor_text_entries'][0].flavor_text;
+
+  console.log(pokeGenus);
+  console.log(pokeAbout);
+
+  let currentPkmnDetais = {};
+  pokemonData.push(currentPkmnDetais);
 }
 
 function renderPokemonTile(pokemonData) {
