@@ -20,6 +20,9 @@ const typeColors = [
   'var(--normal)',
 ];
 let pokemonData = [];
+let pokemon;
+let typeColor;
+let typeBadges;
 let id = 0;
 
 let isLoading = false;
@@ -27,7 +30,6 @@ let isLoading = false;
 async function init() {
   for (let i = 1; i <= 24; i++) {
     await fetchPokeData(id + i);
-    await fetchPokeDetails(id + i);
   }
   renderPokemonTile(pokemonData);
 }
@@ -49,10 +51,10 @@ async function loadMore() {
 }
 
 async function fetchPokeData(id) {
-  let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+  let urlOne = `https://pokeapi.co/api/v2/pokemon/${id}`;
 
-  let response = await fetch(url);
-  let fetchedData = await response.json();
+  let respOne = await fetch(urlOne);
+  let fetchedData = await respOne.json();
   let pokeID = fetchedData['id'].toString().padStart(4, '0');
   let pokeName = capFirstLetter(fetchedData['species']['name']);
   let pokeHeight = fetchedData['height'] / 10; // in meters
@@ -66,31 +68,38 @@ async function fetchPokeData(id) {
   );
   let pokeSprite =
     fetchedData['sprites']['other']['official-artwork']['front_default'];
+
+  let urlTwo = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+
+  let respTwo = await fetch(urlTwo);
+  let fetchedDetail = await respTwo.json();
+
+  let pokeGenus = fetchedDetail['genera'][7].genus;
+  let pokeAbout = fetchedDetail['flavor_text_entries'][1].flavor_text;
+
   let currentPokemon = {
     id: pokeID,
     name: pokeName,
     types: pokeTypes,
     abilities: pokeAbilities,
     sprite: pokeSprite,
+    species: pokeGenus,
+    about: pokeAbout,
+    height: pokeHeight,
+    weight: pokeWeight,
   };
   pokemonData.push(currentPokemon);
 }
 
-async function fetchPokeDetails() {
-  let url = `https://pokeapi.co/api/v2/pokemon-species/4/`;
+// async function fetchPokeDetails(id) {
+//   let urlTwo = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
 
-  let response = await fetch(url);
-  let fetchedDetail = await response.json();
+//   let respTwo = await fetch(urlTwo);
+//   let fetchedDetail = await respTwo.json();
 
-  let pokeGenus = fetchedDetail['genera'][7].genus;
-  let pokeAbout = fetchedDetail['flavor_text_entries'][0].flavor_text;
-
-  let currentPokeDetais = {
-    species: pokeGenus,
-    about: pokeAbout,
-  };
-  pokemonData.push(currentPokeDetais);
-}
+//   let pokeGenus = fetchedDetail['genera'][7].genus;
+//   let pokeAbout = fetchedDetail['flavor_text_entries'][0].flavor_text;
+// }
 
 function renderPokemonTile(pokemonData) {
   if (pokemonData.length > 24) {
@@ -98,15 +107,15 @@ function renderPokemonTile(pokemonData) {
   }
 
   for (let i = 0; i < pokemonData.length; i++) {
-    const pokemon = pokemonData[i];
-    const typeColor = getTypeColor(pokemon.types[0]);
-    const typeBadges = pokemon.types
+    pokemon = pokemonData[i];
+    typeColor = getTypeColor(pokemon.types[0]);
+    typeBadges = pokemon.types
       .map((type) => {
         return `<button>${type}</button>`;
       })
       .join('');
 
-    allPokemons.innerHTML += pokemonTileHTML(pokemon, typeColor, typeBadges);
+    allPokemons.innerHTML += pokemonTileHTML();
   }
 
   const tiles = document.querySelectorAll('.pokemon-tile');
@@ -118,32 +127,9 @@ function renderPokemonTile(pokemonData) {
   });
 }
 
-function renderPokeCard(index) {
-  console.log(index);
-}
-
-// function renderPokemonTile(pokemonData) {
-//   if (pokemonData.length > 24) {
-//     pokemonData = pokemonData.slice(pokemonData.length - 24);
-//   }
-
-//   for (let i = 0; i < pokemonData.length; i++) {
-//     const pokemon = pokemonData[i];
-//     const typeColor = getTypeColor(pokemon.types[0]);
-//     const typeBadges = pokemon.types
-//       .map((type) => {
-//         return `<button>${type}</button>`;
-//       })
-//       .join('');
-
-//     allPokemons.innerHTML += pokemonTileHTML(pokemon, typeColor, typeBadges);
-
-//   }
-// }
-
-function pokemonTileHTML(pokemon, typeColor, typeBadges) {
+function pokemonTileHTML() {
   return /*html*/ `
-    <div class="pokemon-tile" id="pokemon-tile" style="background: ${typeColor}" onclick="renderPokeCard()">
+    <div class="pokemon-tile" id="pokemon-tile" style="background: ${typeColor}" >
         <span class="number">#${pokemon.id}</span>
         <div class="pokemon-content">
           <div class="info">
@@ -158,7 +144,32 @@ function pokemonTileHTML(pokemon, typeColor, typeBadges) {
   `;
 }
 
-function pokeCardHTML(pokemon, typeColor, typeBadges) {
+function renderPokeCard(index) {
+  console.log(index);
+
+  let j = index;
+  pokemon = pokemonData[j];
+  typeBadges = pokemon.types
+    .map((type) => {
+      return `<button>${type}</button>`;
+    })
+    .join('');
+  let abilitiesList = pokemon.abilities
+    .map((ability) => {
+      return `${ability}`;
+    })
+    .join(', ');
+  typeColor = getTypeColor(pokemon.types[0]);
+
+  allPokemons.innerHTML = pokeCardHTML(
+    pokemon,
+    typeColor,
+    typeBadges,
+    abilitiesList
+  );
+}
+
+function pokeCardHTML(pokemon, typeColor, typeBadges, abilitiesList) {
   return /*html*/ `
   <div class="pokemon-card" id="poke-card" style="background: ${typeColor}" >
         <div class="card-header"></div>
@@ -186,27 +197,26 @@ function pokeCardHTML(pokemon, typeColor, typeBadges) {
             <table class="pokemon-info-tb">
               <tr>
                 <td class="detail-label">Species</td>
-                <td class="detail-value">Grass Pokemon</td>
+                <td class="detail-value">${pokemon.species}</td>
               </tr>
               <tr>
                 <td class="detail-label">Height</td>
-                <td class="detail-value">0.7 m</td>
+                <td class="detail-value">${pokemon.height} m</td>
               </tr>
               <tr>
                 <td class="detail-label">Weight</td>
-                <td class="detail-value">6.9 kg</td>
+                <td class="detail-value">${pokemon.weight} kg</td>
               </tr>
               <tr>
                 <td class="detail-label">Abilities</td>
                 <td class="detail-value">
-                  Overgrow <br />
-                  Chlorophyll
+                  ${abilitiesList}
                 </td>
               </tr>
             </table>
             <div class="description">
-              Obviously prefers hot places. When it rains, steam is said to
-              spout from the tip of its tail.
+              ${pokemon.about}
+
             </div>
           </div>
           <div class="base d-none"></div>

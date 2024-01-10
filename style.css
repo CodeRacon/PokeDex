@@ -484,6 +484,7 @@ span.card-name {
   font-size: 1rem;
   text-align: left;
   font-weight: 500;
+  padding-right: 2.5rem;
 }
 
 .detail-value {
