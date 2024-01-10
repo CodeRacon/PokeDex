@@ -18,7 +18,12 @@
 
   --site-bg-gradient: linear-gradient(#f5f7fb, #c7d1e4);
 
-  --text-color: #f5f7fb;
+  --text-white: #f5f7fb;
+  --text-greyblue-45: rgba(66, 90, 116, 0.45);
+  --text-greyblue-65: rgba(66, 90, 116, 0.65);
+  --text-greyblue-85: rgba(66, 90, 116, 0.85);
+  --text-greyblue-95: rgba(66, 90, 116, 0.95);
+
   --btn: linear-gradient(155deg, #95b2e8, #667eab);
   --btn-hover: linear-gradient(155deg, #6193ee, #265abc);
   --btn-active: linear-gradient(155deg, #265abc, #265abc);
@@ -57,7 +62,7 @@ a {
 }
 
 .d-none {
-  display: none;
+  display: none !important;
 }
 
 .test {
@@ -112,7 +117,7 @@ h1 {
   margin: 0.5rem;
   padding: 1.25rem 0rem 1.25rem 1.25rem;
   text-align: center;
-  color: var(--text-color);
+  color: var(--text-white);
   box-shadow: var(--shadow-elevation-medium);
   overflow: hidden;
   cursor: pointer;
@@ -177,7 +182,7 @@ h1 {
   border: none;
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--text-color);
+  color: var(--text-white);
   text-align: center;
   vertical-align: middle;
 }
@@ -218,7 +223,7 @@ h1 {
   border: none;
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--text-color);
+  color: var(--text-white);
   text-align: center;
   vertical-align: middle;
   box-shadow: var(--shadow-elevation-medium);
@@ -230,11 +235,11 @@ h1 {
 }
 
 .load-btn:hover {
-  outline: solid var(--text-color) 0.5px;
+  outline: solid var(--text-white) 0.5px;
 }
 
 .load-btn:active {
-  outline: solid var(--text-color) 3px;
+  outline: solid var(--text-white) 3px;
   color: white;
 }
 
@@ -303,10 +308,10 @@ h1 {
   flex-direction: column;
   background: var(--grass);
   width: 320px;
-  aspect-ratio: 1 / 2.25;
+  aspect-ratio: 1 / 2.0125;
   border-radius: 1rem;
   text-align: center;
-  color: var(--text-color);
+  color: var(--text-white);
   box-shadow: var(--shadow-elevation-high);
   overflow: hidden;
   transition: all ease-in-out 0.25s;
@@ -322,7 +327,7 @@ h1 {
   background-image: url(img/pokeball-fade.png);
   background-size: 56%;
   background-repeat: no-repeat;
-  background-position: top 9.5rem right -2.5rem;
+  background-position: top 7.5rem right -2.5rem;
   z-index: 0;
 }
 
@@ -347,7 +352,7 @@ h1 {
   background-image: url(img/pattern-op-15.png);
   background-size: 25%;
   background-repeat: no-repeat;
-  background-position: top 11rem left 2.5rem;
+  background-position: top 9rem left 2.5rem;
   z-index: 0;
 }
 
@@ -355,7 +360,7 @@ span.card-name {
   font-family: 'Lato', sans-serif;
   font-size: 1.75rem;
   font-weight: 700;
-  color: var(--text-color);
+  color: var(--text-white);
   letter-spacing: 1px;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.125);
   margin: 0 0 0.65rem;
@@ -385,7 +390,7 @@ span.card-name {
   border: none;
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--text-color);
+  color: var(--text-white);
   text-align: center;
   vertical-align: middle;
 }
@@ -393,7 +398,7 @@ span.card-name {
 .card-img-container {
   position: absolute;
   z-index: 99;
-  top: 8.5rem;
+  top: 6.5rem;
   width: 100%;
 }
 
@@ -405,11 +410,11 @@ span.card-name {
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-top: 60%;
+  margin-top: 52.5%;
   padding: 1.25rem 1.125rem 0.75rem;
   flex-grow: 1;
   width: 100%;
-  height: 85.5%;
+  height: 100%;
   background-color: rgba(255, 255, 255, 0.925);
   border-radius: 1.5rem 1.5rem 0 0;
   z-index: 66;
@@ -418,13 +423,12 @@ span.card-name {
 
 .description {
   width: 100%;
-  background: var(--grass);
+  background: var(--text-greyblue-85);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: start;
   font-weight: 500;
   font-size: 1rem;
-  margin-top: 0.5rem;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.025);
 }
 
@@ -436,17 +440,18 @@ span.card-name {
   margin-top: 1rem;
 }
 
-.stat-nav a {
-  color: rgba(66, 90, 116, 0.45);
+.stat-nav span {
+  color: var(--text-greyblue-45);
   font-size: 1rem;
   font-weight: 600;
   background-color: transparent;
   border-bottom: solid 2px transparent;
+  cursor: pointer;
   transition: all 0.125s ease-in-out;
 }
 
-.stat-nav a:hover {
-  color: rgba(66, 90, 116, 0.95);
+.stat-nav span:hover {
+  color: var(--text-greyblue-95);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.125);
   border-bottom: solid 2px rgba(66, 90, 116, 0.85);
 }
@@ -475,7 +480,7 @@ span.card-name {
 }
 
 .detail-label {
-  color: rgba(66, 90, 116, 0.65);
+  color: var(--text-greyblue-65);
   font-size: 1rem;
   text-align: left;
   font-weight: 500;
@@ -483,7 +488,7 @@ span.card-name {
 
 .detail-value {
   text-align: left;
-  color: rgba(66, 90, 116, 0.85);
+  color: var(--text-greyblue-85);
   font-weight: 500;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.125);
 }
@@ -498,7 +503,7 @@ span.card-name {
   cursor: pointer;
   filter: brightness(150%) saturate(80%)
     drop-shadow(1px 2px 4px rgba(1, 11, 29, 0.35));
-  transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease;
 }
 
 .card-footer svg:hover {
