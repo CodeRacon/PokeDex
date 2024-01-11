@@ -267,7 +267,7 @@ h1 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 33;
+  z-index: 111;
   opacity: 0.75;
 }
 
@@ -303,6 +303,9 @@ h1 {
     drop-shadow(1px 2px 4px rgba(1, 11, 29, 0.35));
 }
 
+.card-container {
+}
+
 .pokemon-card {
   position: fixed;
   top: 50%;
@@ -310,9 +313,8 @@ h1 {
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  background: var(--grass);
   width: 320px;
-  aspect-ratio: 1 / 2.0125;
+  height: 680px;
   border-radius: 1rem;
   text-align: center;
   color: var(--text-white);
@@ -435,6 +437,7 @@ span.card-name {
   font-weight: 500;
   font-size: 1rem;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.025);
+  margin-bottom: 0.5rem;
 }
 
 .stat-nav {
@@ -542,7 +545,7 @@ span.card-name {
 .fade-out {
   animation: fadeOut 0.25s ease;
 }
-
+/* 
 @keyframes setBackdrop {
   from {
     filter: blur(none) saturate(1) opacity(1);
@@ -577,10 +580,11 @@ span.card-name {
 .backdrop-unset {
   filter: none;
   cursor: pointer;
-}
+} */
 
 .overlay {
   background-color: transparent;
+  backdrop-filter: blur(10px) saturate(0.65) contrast(0.65);
   z-index: 99;
   position: fixed;
   left: 0;

@@ -15,7 +15,7 @@ function pokemonTileHTML() {
   `;
 }
 
-function pokeCardHTML(pokemon, typeColor, typeBadges, abilitiesList) {
+function pokeCardHTML(index, pokemon, typeColor, typeBadges, abilitiesList) {
   return /*html*/ `
   <div class="overlay d-none" id="overlay" onclick="closeCardAnimation()"></div>
     <div class="pokemon-card d-none" id="poke-card" style="background: ${typeColor}" >
@@ -70,7 +70,7 @@ function pokeCardHTML(pokemon, typeColor, typeBadges, abilitiesList) {
           <div class="evolution d-none"></div>
           <div class="moves d-none"></div>
           <div class="card-footer">
-            <div class="card-btn" id="prev">
+            <div class="card-btn" id="prev" onclick="prevCard(${index})" >
               <svg width="32" height="32" viewBox="0 0 24 24">
                 <path
                   fill="#667eab"
@@ -88,7 +88,7 @@ function pokeCardHTML(pokemon, typeColor, typeBadges, abilitiesList) {
                   d="m9 9l3 3m0 0l3 3m-3-3l-3 3m3-3l3-3m-3 12a9 9 0 1 1 0-18a9 9 0 0 1 0 18" />
               </svg>
             </div>
-            <div class="card-btn" id="next">
+            <div class="card-btn" id="next" onclick="nextCard(${index})" >
               <svg width="32" height="32" viewBox="0 0 24 24">
                 <path
                   fill="#667eab"
