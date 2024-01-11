@@ -104,6 +104,7 @@ h1 {
   align-items: space-between;
   justify-content: center;
   margin: 0 auto;
+  padding-bottom: 4rem;
   max-width: 1200px;
 }
 
@@ -267,7 +268,7 @@ h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 33;
-  opacity: 0.65;
+  opacity: 0.75;
 }
 
 #spinner svg {
@@ -303,7 +304,10 @@ h1 {
 }
 
 .pokemon-card {
-  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   background: var(--grass);
@@ -315,6 +319,7 @@ h1 {
   box-shadow: var(--shadow-elevation-high);
   overflow: hidden;
   transition: all ease-in-out 0.25s;
+  z-index: 99;
 }
 
 .pokemon-card::before {
@@ -510,4 +515,79 @@ span.card-name {
 .card-footer svg:hover {
   filter: brightness(100%) saturate(100%)
     drop-shadow(1px 2px 4px rgba(1, 11, 29, 0.35));
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.25s ease;
+}
+
+.fade-out {
+  animation: fadeOut 0.25s ease;
+}
+
+@keyframes setBackdrop {
+  from {
+    filter: blur(none) saturate(1) opacity(1);
+  }
+  to {
+    filter: blur(8px) saturate(0.65) opacity(0.45);
+  }
+}
+
+@keyframes unsetBackdrop {
+  from {
+    filter: blur(8px) saturate(0.65) opacity(0.45);
+  }
+  to {
+    filter: blur(none) saturate(1) opacity(1);
+  }
+}
+
+.unset-backdrop {
+  animation: unsetBackdrop 0255s ease;
+}
+
+.set-backdrop {
+  animation: setBackdrop 0.25s ease;
+}
+
+.backdrop-set {
+  filter: blur(8px) saturate(0.65) opacity(0.45);
+  cursor: default;
+}
+
+.backdrop-unset {
+  filter: none;
+  cursor: pointer;
+}
+
+.overlay {
+  background-color: transparent;
+  z-index: 99;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
