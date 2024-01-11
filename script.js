@@ -67,9 +67,9 @@ function toggleSpinner(isLoading) {
 
 function openCardAnimation() {
   const pokeCard = document.getElementById('poke-card');
-  const pokeTiles = document.querySelectorAll('.pokemon-tile');
+  // const pokeTiles = document.querySelectorAll('.pokemon-tile');
   const overlay = document.getElementById('overlay');
-  const loadBtn = document.getElementById('load-btn');
+  // const loadBtn = document.getElementById('load-btn');
 
   // loadBtn.classList.toggle('d-none');
   overlay.classList.toggle('d-none');
@@ -80,21 +80,21 @@ function openCardAnimation() {
     pokeCard.classList.toggle('fade-in');
   }, 255);
 
-  pokeTiles.forEach((pokeTile) => {
-    pokeTile.classList.remove('backdrop-unset');
-    pokeTile.classList.add('set-backdrop');
-    setTimeout(() => {
-      pokeTile.classList.add('backdrop-set');
-      pokeTile.classList.remove('set-backdrop');
-    }, 255);
-  });
+  // pokeTiles.forEach((pokeTile) => {
+  //   pokeTile.classList.remove('backdrop-unset');
+  //   pokeTile.classList.add('set-backdrop');
+  //   setTimeout(() => {
+  //     pokeTile.classList.add('backdrop-set');
+  //     pokeTile.classList.remove('set-backdrop');
+  //   }, 255);
+  // });
 }
 
 function closeCardAnimation() {
   const pokeCard = document.getElementById('poke-card');
-  const pokeTiles = document.querySelectorAll('.pokemon-tile');
+  // const pokeTiles = document.querySelectorAll('.pokemon-tile');
   const overlay = document.getElementById('overlay');
-  const loadBtn = document.getElementById('load-btn');
+  // const loadBtn = document.getElementById('load-btn');
 
   // loadBtn.classList.toggle('d-none');
   overlay.classList.toggle('d-none');
@@ -105,12 +105,12 @@ function closeCardAnimation() {
     pokeCard.classList.toggle('d-none');
   }, 255);
 
-  pokeTiles.forEach((pokeTile) => {
-    pokeTile.classList.remove('backdrop-set');
-    pokeTile.classList.add('unset-backdrop');
-    setTimeout(() => {
-      pokeTile.classList.add('backdrop-unset');
-      pokeTile.classList.remove('unset-backdrop');
-    }, 255);
-  });
+  // pokeTiles.forEach((pokeTile) => {
+  //   pokeTile.classList.remove('backdrop-set');
+  //   pokeTile.classList.add('unset-backdrop');
+  //   setTimeout(() => {
+  //     pokeTile.classList.add('backdrop-unset');
+  //     pokeTile.classList.remove('unset-backdrop');
+  //   }, 255);
+  // });
 }
