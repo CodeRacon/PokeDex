@@ -41,10 +41,26 @@ function renderPokeCard(index) {
   typeColor = getTypeColor(pokemon.types[0]);
 
   cardContainer.innerHTML = pokeCardHTML(
+    j,
     pokemon,
     typeColor,
     typeBadges,
     abilitiesList
   );
   openCardAnimation();
+}
+
+async function nextCard(index) {
+  // console.log(index);
+  if (index === pokemonData.length - 1) {
+    await loadMore();
+    renderPokeCard(index + 1);
+  } else {
+    renderPokeCard(index + 1);
+  }
+}
+
+function prevCard(index) {
+  console.log(index);
+  renderPokeCard(index - 1);
 }
