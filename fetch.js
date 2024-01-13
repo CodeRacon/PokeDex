@@ -23,6 +23,13 @@ async function fetchPokeData(id) {
   let statSpAttack = fetchedData['stats'][3].base_stat;
   let statSpDefense = fetchedData['stats'][4].base_stat;
   let statSpeed = fetchedData['stats'][5].base_stat;
+  let statTotal =
+    statHP +
+    statAttack +
+    statDefense +
+    statSpAttack +
+    statSpDefense +
+    statSpeed;
 
   let bestMoves = fetchedData['moves']
     .map((move) => capTwoWords(move.move.name))
@@ -75,6 +82,8 @@ async function fetchPokeData(id) {
     sp_attack: statSpAttack,
     sp_defense: statSpDefense,
     speed: statSpeed,
+    total: statTotal,
+    moves: bestMoves,
     evolution: evoChain,
   };
   pokemonData.push(currentPokemon);
