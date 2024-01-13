@@ -39,7 +39,6 @@ function renderPokeCard(index) {
     })
     .join(', ');
   typeColor = getTypeColor(pokemon.types[0]);
-
   cardContainer.innerHTML = pokeCardHTML(
     j,
     pokemon,
@@ -48,25 +47,26 @@ function renderPokeCard(index) {
     abilitiesList
   );
   renderInfoTab(pokemon, abilitiesList);
-  // renderStatsTab(pokemon);
-  // renderMovesTab(pokemon);
-  // renderEvoTab(pokemon);
-  openTab('info-section');
+
   openCardAnimation();
 }
 
 function renderInfoTab(pokemon, abilitiesList) {
   const tabContainer = document.getElementById('tab-container');
   tabContainer.classList.toggle('fade-in');
-
   tabContainer.innerHTML = infoTabHTML(pokemon, abilitiesList);
+  const currentCaller = document.getElementById('info-caller');
+  const otherCallers = ['stats-caller', 'moves-caller', 'evo-caller'];
+  indicateCaler(currentCaller, otherCallers);
 }
 
 function renderStatsTab(pokemon) {
   const tabContainer = document.getElementById('tab-container');
   tabContainer.classList.toggle('fade-in');
-
   tabContainer.innerHTML = statsTabHTML(pokemon);
+  const currentCaller = document.getElementById('stats-caller');
+  const otherCallers = ['info-caller', 'moves-caller', 'evo-caller'];
+  indicateCaler(currentCaller, otherCallers);
 }
 
 function renderMovesTab(pokemon) {
@@ -78,16 +78,25 @@ function renderMovesTab(pokemon) {
       <span>The 15 best Moves of ${pokemon.name}</span>
     </div>  
 `;
-
   for (let i = 0; i < pokemon.moves.length; i++) {
     const moveName = pokemon.moves[i];
     const moveBtn = document.createElement('button');
     moveBtn.textContent = moveName;
-
     const movesContainer = document.getElementById('moves-container');
-
     movesContainer.appendChild(moveBtn);
+    const currentCaller = document.getElementById('moves-caller');
+    const otherCallers = ['stats-caller', 'info-caller', 'evo-caller'];
+    indicateCaler(currentCaller, otherCallers);
   }
+}
+
+function renderEvoTab(pokemon) {
+  const tabContainer = document.getElementById('tab-container');
+  tabContainer.classList.toggle('fade-in');
+  tabContainer.innerHTML = evoTabHTML(pokemon);
+  const currentCaller = document.getElementById('evo-caller');
+  const otherCallers = ['info-caller', 'moves-caller', 'stats-caller'];
+  indicateCaler(currentCaller, otherCallers);
 }
 
 async function nextCard(index) {
@@ -105,23 +114,32 @@ function prevCard(index) {
   renderPokeCard(index - 1);
 }
 
-function openTab(sectionID) {
-  const allSections = [
-    'info-section',
-    'stats-section',
-    'moves-section',
-    'evo-section',
-  ];
+// function openTab(sectionID) {
+//   const caller = document.querySelectorAll('.caller');
+//   const allSections = [
+//     'info-section',
+//     'stats-section',
+//     'moves-section',
+//     'evo-section',
+//   ];
 
-  allSections.forEach((section) => {
-    const currentSection = document.getElementById(section);
+//   allSections.forEach((section) => {
+//     const currentSection = document.getElementById(section);
 
-    if (currentSection) {
-      if (section === sectionID) {
-        currentSection.classList.remove('d-none');
-      } else {
-        currentSection.classList.add('d-none');
-      }
-    }
+//     if (currentSection) {
+//       if (section === sectionID) {
+//         currentSection.classList.remove('d-none');
+//       } else {
+//         currentSection.classList.add('d-none');
+//       }
+//     }
+//   });
+// }
+
+function indicateCaler(currentCaller, otherCallers) {
+  currentCaller.classList.add('active');
+  otherCallers.forEach((elementId) => {
+    const element = document.getElementById(elementId);
+    element.classList.remove('active');
   });
 }

@@ -452,7 +452,7 @@ span.card-name {
 
 .stat-nav span {
   color: var(--text-greyblue-45);
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
   background-color: transparent;
   border-bottom: solid 2px transparent;
@@ -466,12 +466,21 @@ span.card-name {
   border-bottom: solid 2px rgba(66, 90, 116, 0.85);
 }
 
+.active {
+  color: var(--text-greyblue-95) !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.125) !important;
+  border-bottom: solid 2px rgba(66, 90, 116, 0.85) !important ;
+}
+
 .tab-container {
   display: flex;
   justify-content: space-between;
   height: 100%;
   width: 100%;
+  padding: 1.125rem 0;
+
   border-top: rgba(66, 90, 116, 0.125) 1px solid;
+  cursor: default;
 }
 
 .info-tab,
@@ -479,13 +488,13 @@ span.card-name {
 .moves-tab {
   height: 100%;
   width: 100%;
-  padding: 0.5rem 0;
 }
 
 .info-tab table {
   border-spacing: 0px 12px;
   width: 100%;
   height: fit-content;
+  margin-top: -1rem;
 }
 
 .info-tab td {
@@ -610,7 +619,6 @@ span.card-name {
 .stats-tab {
   display: flex;
   flex-direction: column;
-  padding-top: 1rem;
 }
 
 .stat-line {
@@ -665,7 +673,6 @@ progress::-webkit-progress-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  padding-top: 1.25rem;
   height: max-content;
 }
 

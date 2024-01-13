@@ -34,10 +34,10 @@ function pokeCardHTML(index, pokemon, typeColor, typeBadges) {
 
         <div class="poke-stats">
           <div class="stat-nav">
-            <span onclick="renderInfoTab(pokemon)" >Info</span>
-            <span onclick="renderStatsTab(pokemon)" >Stats</span>
-            <span onclick="renderMovesTab(pokemon)" >Moves</span>
-            <span onclick="renderEvoTab(pokemon)" >Evolution</span>
+            <span id="info-caller" onclick="renderInfoTab(pokemon)" >Info</span>
+            <span id="stats-caller" onclick="renderStatsTab(pokemon)" >Base Stats</span>
+            <span id="moves-caller" onclick="renderMovesTab(pokemon)" >Moves</span>
+            <span id="evo-caller" onclick="renderEvoTab(pokemon)" >Evolution</span>
           </div>
           <div class="tab-container" id="tab-container">
 
@@ -109,49 +109,49 @@ function statsTabHTML(pokemon) {
       <div class="stat-line">
         <label for="hp">HP</label>
         <span class="stat-value">${pokemon.hp}</span>
-        <progress id="hp" max="100" value="${pokemon.hp}"></progress>
+        <progress id="hp" max="225" value="${pokemon.hp}"></progress>
       </div>
 
       <div class="stat-line">
         <label for="attack">Attack</label>
         <span class="stat-value">${pokemon.attack}</span>
-        <progress id="attack" max="100" value="${pokemon.attack}"></progress>
+        <progress id="attack" max="225" value="${pokemon.attack}"></progress>
       </div>
 
       <div class="stat-line">
         <label for="attack">Special Att.</label>
         <span class="stat-value">${pokemon.sp_attack}</span>
-        <progress id="attack" max="100" value="${pokemon.sp_attack}"></progress>
+        <progress id="attack" max="225" value="${pokemon.sp_attack}"></progress>
       </div>
 
       <div class="stat-line">
         <label for="defense">Defense</label>
         <span class="stat-value">${pokemon.defense}</span>
-        <progress id="defense" max="100" value="${pokemon.defense}"></progress>
+        <progress id="defense" max="225" value="${pokemon.defense}"></progress>
       </div>
 
       <div class="stat-line">
         <label for="defense">Special Def.</label>
         <span class="stat-value">${pokemon.sp_defense}</span>
-        <progress id="defense" max="100" value="${pokemon.sp_defense}"></progress>
+        <progress id="defense" max="225" value="${pokemon.sp_defense}"></progress>
       </div>
 
       <div class="stat-line">
         <label for="defense">Speed</label>
         <span class="stat-value">${pokemon.speed}</span>
-        <progress id="defense" max="100" value="${pokemon.speed}"></progress>
+        <progress id="defense" max="225" value="${pokemon.speed}"></progress>
       </div>
 
       <div class="stat-line">
         <label for="total">Total</label>
         <span class="stat-value">${pokemon.total}</span>
-        <progress id="total" max="1000" value="${pokemon.total}"></progress>
+        <progress id="total" max="1350" value="${pokemon.total}"></progress>
       </div>
     </div>
   `;
 }
 
-function evoTabHTML() {
+function evoTabHTML(pokemon) {
   return /*html*/ `
     
   `;
