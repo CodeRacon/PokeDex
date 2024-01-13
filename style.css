@@ -464,17 +464,27 @@ span.card-name {
   border-bottom: solid 2px rgba(66, 90, 116, 0.85);
 }
 
-.info-tab {
-  color: black;
+.tab-container {
+  display: flex;
+  justify-content: space-between;
   height: 100%;
+  width: 100%;
+  border-top: rgba(66, 90, 116, 0.125) 1px solid;
+}
+
+.info-tab,
+.stats-tab,
+.moves-tab {
+  height: 100%;
+  width: 100%;
+  padding-top: 0.5rem;
+  border: 2px solid black;
 }
 
 .info-tab table {
-  padding-top: 0.5rem;
   border-spacing: 0px 12px;
   width: 100%;
   height: fit-content;
-  border-top: rgba(66, 90, 116, 0.125) 1px solid;
 }
 
 .info-tab td {
@@ -594,4 +604,56 @@ span.card-name {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.stat-tab {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-line {
+  display: grid;
+  grid-template-columns: 4.575rem auto 1fr;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  column-gap: 0.65rem;
+}
+
+.stat-line progress {
+  appearance: none;
+  height: 0.5rem;
+  background: none;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+progress::-webkit-progress-value {
+  background: var(--btn);
+  border-radius: 0.25rem;
+  box-shadow: var(--shadow-elevation-low);
+}
+
+progress::-moz-progress-bar {
+  background: #00000015;
+  border-radius: 0.25rem;
+}
+
+progress::-webkit-progress-bar {
+  background: #00000015;
+
+  border-radius: 0.25rem;
+}
+
+.stat-line label {
+  color: var(--text-greyblue-85);
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.stat-line span {
+  color: var(--text-greyblue-45);
+  font-size: 0.8rem;
+  font-weight: 900;
+  align-self: flex-end;
 }

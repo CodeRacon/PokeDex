@@ -47,7 +47,21 @@ function renderPokeCard(index) {
     typeBadges,
     abilitiesList
   );
+  // renderInfoTab(pokemon, abilitiesList);
+  renderstatsTab(pokemon);
   openCardAnimation();
+}
+
+function renderInfoTab(pokemon, abilitiesList) {
+  const tabContainer = document.getElementById('tab-container');
+
+  tabContainer.innerHTML = infoTabHTML(pokemon, abilitiesList);
+}
+
+function renderstatsTab(pokemon) {
+  const tabContainer = document.getElementById('tab-container');
+
+  tabContainer.innerHTML = statsTabHTML(pokemon);
 }
 
 async function nextCard(index) {
