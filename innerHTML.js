@@ -34,10 +34,10 @@ function pokeCardHTML(index, pokemon, typeColor, typeBadges) {
 
         <div class="poke-stats">
           <div class="stat-nav">
-            <span>Info</span>
-            <span>Stats</span>
-            <span>Moves</span>
-            <span>Evolution</span>
+            <span onclick="renderInfoTab(pokemon)" >Info</span>
+            <span onclick="renderStatsTab(pokemon)" >Stats</span>
+            <span onclick="renderMovesTab(pokemon)" >Moves</span>
+            <span onclick="renderEvoTab(pokemon)" >Evolution</span>
           </div>
           <div class="tab-container" id="tab-container">
 
@@ -79,7 +79,7 @@ function pokeCardHTML(index, pokemon, typeColor, typeBadges) {
 
 function infoTabHTML(pokemon, abilitiesList) {
   return /*html*/ `
-    <div class="info-tab">
+    <div class="info-tab " id="info-section">
       <table class="pokemon-info-tb">
         <tr>
           <td class="detail-label">Species</td>
@@ -105,7 +105,7 @@ function infoTabHTML(pokemon, abilitiesList) {
 
 function statsTabHTML(pokemon) {
   return /*html*/ `
-    <div class="stats-tab">
+    <div class="stats-tab " id="stats-section">
       <div class="stat-line">
         <label for="hp">HP</label>
         <span class="stat-value">${pokemon.hp}</span>
@@ -141,13 +141,13 @@ function statsTabHTML(pokemon) {
         <span class="stat-value">${pokemon.speed}</span>
         <progress id="defense" max="100" value="${pokemon.speed}"></progress>
       </div>
-    </div>
-  `;
-}
 
-function movesTabHTML() {
-  return /*html*/ `
-    
+      <div class="stat-line">
+        <label for="total">Total</label>
+        <span class="stat-value">${pokemon.total}</span>
+        <progress id="total" max="1000" value="${pokemon.total}"></progress>
+      </div>
+    </div>
   `;
 }
 

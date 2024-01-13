@@ -1,8 +1,8 @@
 :root {
   --shadow-color: 220deg 17% 52%;
-  --shadow-elevation-low: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.45),
-    0.4px 0.8px 0.9px -1.6px hsl(var(--shadow-color) / 0.38),
-    1px 2px 2.3px -3.2px hsl(var(--shadow-color) / 0.31);
+  --shadow-elevation-low: 0.6px 0.7px 1px hsl(var(--shadow-color) / 0.27),
+    0.9px 1.2px 1.7px -1.2px hsl(var(--shadow-color) / 0.27),
+    2px 2.7px 3.8px -2.5px hsl(var(--shadow-color) / 0.27);
   --shadow-elevation-medium: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.47),
     0.7px 1.4px 1.6px -1.1px hsl(var(--shadow-color) / 0.42),
     1.9px 3.9px 4.4px -2.2px hsl(var(--shadow-color) / 0.36),
@@ -27,6 +27,8 @@
   --btn: linear-gradient(155deg, #95b2e8, #667eab);
   --btn-hover: linear-gradient(155deg, #6193ee, #265abc);
   --btn-active: linear-gradient(155deg, #265abc, #265abc);
+
+  --moves: linear-gradient(155deg, #70758114, #292a2c26);
 
   --fire: linear-gradient(155deg, #fe8c90, #c43237);
   --bug: linear-gradient(155deg, #5cdab6, #209272);
@@ -477,8 +479,7 @@ span.card-name {
 .moves-tab {
   height: 100%;
   width: 100%;
-  padding-top: 0.5rem;
-  border: 2px solid black;
+  padding: 0.5rem 0;
 }
 
 .info-tab table {
@@ -606,17 +607,18 @@ span.card-name {
   justify-content: center;
 }
 
-.stat-tab {
+.stats-tab {
   display: flex;
   flex-direction: column;
+  padding-top: 1rem;
 }
 
 .stat-line {
   display: grid;
-  grid-template-columns: 4.575rem auto 1fr;
+  grid-template-columns: 4.55rem 1.5rem 1fr;
   align-items: center;
   margin-bottom: 0.75rem;
-  column-gap: 0.65rem;
+  column-gap: 1.125rem;
 }
 
 .stat-line progress {
@@ -625,6 +627,7 @@ span.card-name {
   background: none;
   border: none;
   border-radius: 0.25rem;
+  width: 100%;
 }
 
 progress::-webkit-progress-value {
@@ -640,7 +643,6 @@ progress::-moz-progress-bar {
 
 progress::-webkit-progress-bar {
   background: #00000015;
-
   border-radius: 0.25rem;
 }
 
@@ -656,4 +658,38 @@ progress::-webkit-progress-bar {
   font-size: 0.8rem;
   font-weight: 900;
   align-self: flex-end;
+  text-align: right;
+}
+
+.moves-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 1.25rem;
+  height: max-content;
+}
+
+.moves-container span {
+  width: 100%;
+  text-align: left;
+  color: var(--text-greyblue-85);
+  font-size: 0.875rem;
+  font-weight: 700;
+  align-self: flex-end;
+  padding-bottom: 0.25rem;
+}
+
+.moves-container button {
+  width: fit-content;
+  height: fit-content;
+  background: var(--moves);
+  padding: 0.4rem 0.8rem;
+  border-radius: 16px;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-greyblue-65);
+  text-align: center;
+  vertical-align: middle;
+  box-shadow: var(--shadow-elevation-low);
 }
