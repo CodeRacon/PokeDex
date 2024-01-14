@@ -1,8 +1,19 @@
-async function fetchPokeData(id) {
-  let urlOne = `https://pokeapi.co/api/v2/pokemon/${id}`;
+async function fetchPokeData(identifier) {
+  let urlOne;
+  let urlTwo;
 
+  if (Number.isInteger(identifier)) {
+    // Wenn identifier eine Zahl ist, verwenden Sie es als id
+    urlOne = `https://pokeapi.co/api/v2/pokemon/${identifier}`;
+    urlTwo = `https://pokeapi.co/api/v2/pokemon-species/${identifier}`;
+  } else {
+    // Andernfalls nehmen Sie es als Namen
+    urlOne = `https://pokeapi.co/api/v2/pokemon/${identifier.toLowerCase()}`;
+    urlTwo = `https://pokeapi.co/api/v2/pokemon-species/${identifier.toLowerCase()}`;
+  }
   let respOne = await fetch(urlOne);
   let fetchedData = await respOne.json();
+  let ID = fetchedData['id'];
   let pokeID = fetchedData['id'].toString().padStart(4, '0');
   let pokeName = capFirstLetter(fetchedData['species']['name']);
   let pokeHeight = fetchedData['height'] / 10; // in meters
@@ -35,19 +46,9 @@ async function fetchPokeData(id) {
     .map((move) => capTwoWords(move.move.name))
     .slice(0, 15);
 
-  // console.log(fetchedData['moves']);
-  // console.log(bestMoves);
-  // console.log(pokeName);
-  // console.log('HP:' + statHP);
-  // console.log('Attack:' + statAttack);
-  // console.log('Defense:' + statDefense);
-  // console.log('Special-Attack:' + statSpAttack);
-  // console.log('Special-Defense:' + statSpDefense);
-  // console.log('Speed:' + statSpeed);
-
   // --------------------------------------------------------------
 
-  let urlTwo = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+  // let urlTwo = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
 
   let respTwo = await fetch(urlTwo);
   let fetchedDetail = await respTwo.json();
@@ -55,17 +56,18 @@ async function fetchPokeData(id) {
   let pokeGenus = fetchedDetail['genera'][7].genus;
   let pokeAbout = fetchedDetail['flavor_text_entries'][1].flavor_text;
 
-  const evoChainUrl = fetchedDetail.evolution_chain.url;
-  const evoChainResponse = await fetch(evoChainUrl);
-  const evoChainData = await evoChainResponse.json();
+  // const evoChainUrl = fetchedDetail.evolution_chain.url;
+  // const evoChainResponse = await fetch(evoChainUrl);
+  // const evoChainData = await evoChainResponse.json();
 
-  const evoChain = [];
+  // const evoChain = [];
 
-  extractNames(evoChainData.chain, evoChain);
+  // extractEvoNames(evoChainData.chain, evoChain);
 
-  console.log(fetchedDetail['evolution_chain'].url);
+  // console.log(fetchedDetail['evolution_chain'].url);
 
   let currentPokemon = {
+    ID: ID,
     id: pokeID,
     name: pokeName,
     types: pokeTypes,
@@ -84,23 +86,8 @@ async function fetchPokeData(id) {
     speed: statSpeed,
     total: statTotal,
     moves: bestMoves,
-    evolution: evoChain,
   };
   pokemonData.push(currentPokemon);
-
-  console.log(evoChain);
-}
-
-function extractNames(chain, evoChain) {
-  if (chain && chain.species && chain.species.name) {
-    evoChain.push(capFirstLetter(chain.species.name));
-
-    if (chain.evolves_to && chain.evolves_to.length > 0) {
-      chain.evolves_to.forEach((evolution) => {
-        extractNames(evolution, evoChain); // Hier wurde das zweite Argument hinzugefügt
-      });
-    }
-  }
 }
 
 function capFirstLetter(word) {
