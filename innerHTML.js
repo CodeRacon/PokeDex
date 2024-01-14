@@ -151,8 +151,14 @@ function statsTabHTML(pokemon) {
   `;
 }
 
-function evoTabHTML(pokemon) {
+function evoTabHTML(evo) {
   return /*html*/ `
-    
-  `;
+    <div class="evo-tab " id="evo-section">
+      <span class="evo-header" >${evo.name} evolves in ${evo.evolution.length} stages:</span>
+       
+      <div class="evo-container" id="evo-container" >
+
+       </div>
+    </div>
+      `;
 }

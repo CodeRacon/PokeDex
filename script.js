@@ -20,6 +20,7 @@ const typeColors = [
   'var(--normal)',
 ];
 let pokemonData = [];
+let evoData = [];
 let pokemon;
 let typeColor;
 let typeBadges;

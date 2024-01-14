@@ -28,7 +28,9 @@
   --btn-hover: linear-gradient(155deg, #6193ee, #265abc);
   --btn-active: linear-gradient(155deg, #265abc, #265abc);
 
-  --moves: linear-gradient(155deg, #70758114, #292a2c26);
+  --moves: linear-gradient(155deg, #70758118, #70758114);
+
+  --evo-arrow: linear-gradient(180deg, #70758114, #292a2c00);
 
   --fire: linear-gradient(155deg, #fe8c90, #c43237);
   --bug: linear-gradient(155deg, #5cdab6, #209272);
@@ -508,11 +510,11 @@ span.card-name {
 }
 
 .detail-label {
-  color: var(--text-greyblue-65);
-  font-size: 1rem;
+  color: var(--text-greyblue-85);
+  font-weight: 700;
+  font-size: 0.875rem;
   text-align: left;
-  font-weight: 500;
-  padding-right: 2.5rem;
+  padding-right: 0.875rem;
 }
 
 .detail-value {
@@ -699,4 +701,77 @@ progress::-webkit-progress-bar {
   text-align: center;
   vertical-align: middle;
   box-shadow: var(--shadow-elevation-low);
+}
+
+.evo-tab {
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  width: 100%;
+}
+
+.evo-header {
+  text-align: left !important;
+}
+
+.evo-id {
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.15);
+}
+
+.evo-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.evo-stage {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 2.25rem;
+  border-radius: 1rem;
+  margin-bottom: 2.125rem;
+  padding: 0 1.25rem 0 6.75rem;
+  text-align: left;
+  color: var(--text-white);
+  box-shadow: var(--shadow-elevation-low);
+  cursor: pointer;
+  transition: all ease-in-out 0.125s;
+}
+
+.evo-stage:hover {
+  box-shadow: var(--shadow-elevation-medium);
+}
+
+.evo-stage:hover img {
+  left: 8%;
+}
+
+.evo-name {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-white);
+  letter-spacing: 1px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.125);
+}
+
+.evo-stage img {
+  position: absolute;
+  width: 65px;
+  object-fit: contain;
+  z-index: 99;
+  left: 4%;
+  transition: all ease-in-out 0.25s;
+}
+
+.evo-direction {
+  display: flex;
+  justify-content: end;
+  height: 100%;
+  width: fit-content;
+  background: blue;
 }
