@@ -1,4 +1,9 @@
-const allPokemons = document.getElementById('poke-container');
+// ARRAYS
+/** main json for fetched data */
+let pokemonData = [];
+/** additional json for a pokemons evolution-chain data */
+let evoData = [];
+/** set of css-variables for linear-gradients */
 const typeColors = [
   'var(--fire)',
   'var(--grass)',
@@ -19,22 +24,51 @@ const typeColors = [
   'var(--dark)',
   'var(--normal)',
 ];
-let pokemonData = [];
-let evoData = [];
+
+// VARIABLES
+
+/** parent-element for all tiles & cards */
+const allPokemons = document.getElementById('poke-container');
+/** short term for 'pokemonData[i]' */
 let pokemon;
+/** background color, based on the fetched type-value */
 let typeColor;
+/** short term for the html-element to be created */
 let typeBadges;
-let id = 0;
 
+/**  @param {boolean} isLoading boolean flag to indicate loading status */
 let isLoading = false;
+/**  @param {boolean} isFromEvoTab boolean flag to indicate if called from evolution tab in card-view */
+let isFromEvoTab = false;
 
+// FUNCTIONS
+
+/** async initial onload-function
+ * - calls and awaits {@link fetchAllData} within a for-loop 24 times
+ * - handing over @param {number} i
+ * - starts with i=1 since there is no pokemon with ID = 0
+ * - calls {@link renderPokemonTile}
+ * - handing over @param {string} pokemonData
+ */
 async function init() {
   for (let i = 1; i <= 24; i++) {
-    await fetchPokeData(id + i);
+    await fetchAllData(i);
   }
   renderPokemonTile(pokemonData);
 }
 
+/** loads additional Pokemon data
+ * - checks if data is currently being loaded
+ * - if loading, returns early
+ * - sets {@link isLoading} flag to true
+ * - toggles loading-spinner based on {@link isLoading} status
+ * - calculates next Pokemon-ID based on {@link pokemonData}-length
+ * - fetches data for the next 24 Pokemon starting from nextId
+ * - calls {@link fetchAllData} within a for-loop 24 times
+ * - handing over @param {number} i
+ * - calls {@link renderPokemonTile} with updated pokemonData
+ * - toggles loading-spinner back off with {@link isLoading}=false after loading is complete
+ */
 async function loadMore() {
   if (isLoading) {
     return;
@@ -44,13 +78,17 @@ async function loadMore() {
 
   const nextId = pokemonData.length + 1;
   for (let i = 0; i < 24; i++) {
-    await fetchPokeData(nextId + i);
+    await fetchAllData(nextId + i);
   }
   renderPokemonTile(pokemonData);
   isLoading = false;
   toggleSpinner(isLoading);
 }
 
+/** toggles the visibility, appearance and state of the spinner element based on {@link isLoading} - state
+ * * ---
+ * receives: @param {boolean} isLoading
+ */
 function toggleSpinner(isLoading) {
   const spinner = document.getElementById('spinner');
 
@@ -66,11 +104,10 @@ function toggleSpinner(isLoading) {
   }
 }
 
+/** performs a decent animation to open a Pokemon card */
 function openCardAnimation() {
   const pokeCard = document.getElementById('poke-card');
-  // const pokeTiles = document.querySelectorAll('.pokemon-tile');
   const overlay = document.getElementById('overlay');
-  // const loadBtn = document.getElementById('load-btn');
 
   overlay.classList.toggle('d-none');
   pokeCard.classList.toggle('d-none');
@@ -81,6 +118,7 @@ function openCardAnimation() {
   }, 255);
 }
 
+/** performs a decent animation to close a Pokemon card */
 function closeCardAnimation() {
   const pokeCard = document.getElementById('poke-card');
   const overlay = document.getElementById('overlay');
