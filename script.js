@@ -1,8 +1,8 @@
-// ARRAYS
-/** main json for fetched data */
+// ARRAYS + JSON-objects
+
+/** main json-object for fetched data */
 let pokemonData = [];
-/** additional json for a pokemons evolution-chain data */
-let evoData = [];
+
 /** set of css-variables for linear-gradients */
 const typeColors = [
   'var(--fire)',
@@ -31,7 +31,10 @@ const typeColors = [
 const allPokemons = document.getElementById('poke-container');
 /** short term for 'pokemonData[i]' */
 let pokemon;
-/** background color, based on the fetched type-value */
+
+let likeSymbol;
+
+/** background color, based on the fetched type-value of the Pokemon (grass, water, etc.) */
 let typeColor;
 /** short term for the html-element to be created */
 let typeBadges;
@@ -128,4 +131,15 @@ function closeCardAnimation() {
     pokeCard.classList.toggle('fade-out');
     pokeCard.classList.toggle('d-none');
   }, 255);
+}
+
+function toggleLike(pokemon) {
+  if (pokemon.isLiked === 'true') {
+    pokemon.isLiked = 'false';
+  } else {
+    pokemon.isLiked = 'true';
+  }
+  renderHeart(pokemon);
+
+  // save();
 }

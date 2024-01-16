@@ -1,7 +1,8 @@
-function pokemonTileHTML() {
+function pokemonTileHTML(pokemon) {
   return /*html*/ `
       <div class="pokemon-tile" id="pokemon-tile"  style="background: ${typeColor}">
-        <span class="number">#${pokemon.id}</span>
+          <span class="number">#${pokemon.ID}</span>
+
         <div class="pokemon-content">
           <div class="info">
             <h3 class="name">${pokemon.name}</h3>
@@ -22,7 +23,12 @@ function pokeCardHTML(index, pokemon, typeColor, typeBadges) {
         <div class="card-header"></div>
         <div class="card-info">
           <span class="card-name">${pokemon.name}</span>
-          <div class="card-number">#${pokemon.id}</div>
+          <div class="top-right">
+          <div class="heart-wrapper" id="heart-symbol" onclick="toggleLike(pokemon)"> 
+            
+          </div>
+          <div class="card-number">#${pokemon.ID}</div>
+        </div>
         </div>
         <div class="card-type-btn">
           ${typeBadges}
