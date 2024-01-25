@@ -34,7 +34,7 @@
   height: 4rem;
 }
 
-.top-right {
+.top-right-card {
   display: flex;
   justify-content: space-between;
   align-items: end;
@@ -42,14 +42,13 @@
   width: 37.5%;
 }
 
-.heart-wrapper {
-  /* position: relative; */
+.heart-wrapper-card {
   cursor: pointer;
 }
 
-.heart-wrapper svg {
-  width: 1.55rem;
-  height: 1.55rem;
+.heart-wrapper-card svg {
+  width: 1.5rem;
+  height: 1.5rem;
   vertical-align: middle;
   filter: drop-shadow(0 2px 2px #00000026);
 }
@@ -271,6 +270,43 @@ span.card-name {
   border: none;
   border-radius: 0.25rem;
   width: 100%;
+  opacity: 0;
+  animation: progress 0.35s ease-in-out forwards;
+}
+
+#attack {
+  animation-delay: 15ms;
+}
+
+#spec-attack {
+  animation-delay: 30ms;
+}
+
+#defense {
+  animation-delay: 45ms;
+}
+
+#spec-defense {
+  animation-delay: 60ms;
+}
+
+#speed {
+  animation-delay: 75ms;
+}
+
+#total {
+  animation-delay: 90ms;
+}
+
+@keyframes progress {
+  0% {
+    width: 0%;
+    opacity: 0;
+    background: transparent;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 progress::-webkit-progress-value {
