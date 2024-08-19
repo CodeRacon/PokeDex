@@ -5,24 +5,24 @@ let pokemonData = [];
 
 /** set of css-variables for linear-gradients */
 const typeColors = [
-  'var(--fire)',
-  'var(--grass)',
-  'var(--electric)',
-  'var(--water)',
-  'var(--ground)',
-  'var(--rock)',
-  'var(--steel)',
-  'var(--fairy)',
-  'var(--poison)',
-  'var(--bug)',
-  'var(--dragon)',
-  'var(--psychic)',
-  'var(--flying)',
-  'var(--fighting)',
-  'var(--ghost)',
-  'var(--ice)',
-  'var(--dark)',
-  'var(--normal)',
+	'var(--fire)',
+	'var(--grass)',
+	'var(--electric)',
+	'var(--water)',
+	'var(--ground)',
+	'var(--rock)',
+	'var(--steel)',
+	'var(--fairy)',
+	'var(--poison)',
+	'var(--bug)',
+	'var(--dragon)',
+	'var(--psychic)',
+	'var(--flying)',
+	'var(--fighting)',
+	'var(--ghost)',
+	'var(--ice)',
+	'var(--dark)',
+	'var(--normal)',
 ];
 
 // VARIABLES
@@ -92,21 +92,21 @@ const unlikedSVG = `
 // FUNCTIONS
 
 /** async initial onload-function
- * - calls and awaits {@link fetchAllData} within a for-loop 24 times
+ * - calls and awaits {@link fetchAllData} within a for-loop 12 times
  * - handing over @param {number} i
  * - starts with i=1 since there is no pokemon with ID = 0
  * - calls {@link renderPokemonTile}
  * - handing over @param {string} pokemonData
  */
 async function init() {
-  isLoading = true;
-  toggleSpinner(isLoading);
-  for (let i = 1; i <= 24; i++) {
-    await fetchAllData(i);
-  }
-  renderPokemonTile(pokemonData);
-  isLoading = false;
-  toggleSpinner(isLoading);
+	isLoading = true;
+	toggleSpinner(isLoading);
+	for (let i = 1; i <= 12; i++) {
+		await fetchAllData(i);
+	}
+	renderPokemonTile(pokemonData);
+	isLoading = false;
+	toggleSpinner(isLoading);
 }
 
 /** loads additional Pokemon data
@@ -115,27 +115,27 @@ async function init() {
  * - sets {@link isLoading} flag to true
  * - toggles loading-spinner based on {@link isLoading} status
  * - calculates next Pokemon-ID based on {@link pokemonData}-length
- * - fetches data for the next 24 Pokemon starting from nextId
- * - calls {@link fetchAllData} within a for-loop 24 times
+ * - fetches data for the next 12 Pokemon starting from nextId
+ * - calls {@link fetchAllData} within a for-loop 12 times
  * - handing over @param {number} i
  * - calls {@link renderPokemonTile} with updated pokemonData
  * - toggles loading-spinner back off with {@link isLoading}=false after loading is complete
  */
 async function loadMore() {
-  if (isLoading) {
-    return;
-  }
-  isLoading = true;
-  toggleSpinner(isLoading);
+	if (isLoading) {
+		return;
+	}
+	isLoading = true;
+	toggleSpinner(isLoading);
 
-  const nextId = pokemonData.length + 1;
-  for (let i = 0; i < 24; i++) {
-    await fetchAllData(nextId + i);
-  }
-  renderPokemonTile(pokemonData);
-  isLoading = false;
-  toggleSpinner(isLoading);
-  addOnClicks();
+	const nextId = pokemonData.length + 1;
+	for (let i = 0; i < 12; i++) {
+		await fetchAllData(nextId + i);
+	}
+	renderPokemonTile(pokemonData);
+	isLoading = false;
+	toggleSpinner(isLoading);
+	addOnClicks();
 }
 
 /**
@@ -144,21 +144,21 @@ async function loadMore() {
  * @param {boolean} isLoading - Whether data is currently loading
  */
 function toggleSpinner(isLoading) {
-  const spinner = document.getElementById('spinner');
-  const footer = document.getElementById('footer');
+	const spinner = document.getElementById('spinner');
+	const footer = document.getElementById('footer');
 
-  if (isLoading) {
-    spinner.classList.remove('no-spinning', 'd-none');
-    spinner.classList.add('spinning');
-    footer.classList.add('d-none');
-  } else {
-    spinner.classList.remove('spinning');
-    spinner.classList.add('no-spinning');
-    setTimeout(() => {
-      spinner.classList.add('d-none');
-      footer.classList.remove('d-none');
-    }, 145);
-  }
+	if (isLoading) {
+		spinner.classList.remove('no-spinning', 'd-none');
+		spinner.classList.add('spinning');
+		footer.classList.add('d-none');
+	} else {
+		spinner.classList.remove('spinning');
+		spinner.classList.add('no-spinning');
+		setTimeout(() => {
+			spinner.classList.add('d-none');
+			footer.classList.remove('d-none');
+		}, 145);
+	}
 }
 
 /**
@@ -166,17 +166,17 @@ function toggleSpinner(isLoading) {
  * Hides the search input, fades in the card and overlay
  */
 function openCardAnimation() {
-  const pokeCard = document.getElementById('poke-card');
-  const overlay = document.getElementById('overlay');
+	const pokeCard = document.getElementById('poke-card');
+	const overlay = document.getElementById('overlay');
 
-  searchInput.value = '';
-  overlay.classList.toggle('d-none');
-  pokeCard.classList.toggle('d-none');
+	searchInput.value = '';
+	overlay.classList.toggle('d-none');
+	pokeCard.classList.toggle('d-none');
 
-  pokeCard.classList.toggle('fade-in');
-  setTimeout(() => {
-    pokeCard.classList.toggle('fade-in');
-  }, 255);
+	pokeCard.classList.toggle('fade-in');
+	setTimeout(() => {
+		pokeCard.classList.toggle('fade-in');
+	}, 255);
 }
 
 /**
@@ -184,16 +184,16 @@ function openCardAnimation() {
  * Fades out the card and hides the overlay
  */
 function closeCardAnimation() {
-  const pokeCard = document.getElementById('poke-card');
-  const overlay = document.getElementById('overlay');
+	const pokeCard = document.getElementById('poke-card');
+	const overlay = document.getElementById('overlay');
 
-  overlay.classList.toggle('d-none');
+	overlay.classList.toggle('d-none');
 
-  pokeCard.classList.toggle('fade-out');
-  setTimeout(() => {
-    pokeCard.classList.toggle('fade-out');
-    pokeCard.classList.toggle('d-none');
-  }, 255);
+	pokeCard.classList.toggle('fade-out');
+	setTimeout(() => {
+		pokeCard.classList.toggle('fade-out');
+		pokeCard.classList.toggle('d-none');
+	}, 255);
 }
 
 /**
@@ -202,7 +202,7 @@ function closeCardAnimation() {
  */
 const searchInput = document.getElementById('search-input');
 searchInput.addEventListener('input', function () {
-  searchPokemon();
+	searchPokemon();
 });
 
 /**
@@ -216,15 +216,15 @@ searchInput.addEventListener('input', function () {
  * Shows/hides no matches message based on number of matches
  */
 function searchPokemon() {
-  const searchTerm = searchInput.value.toLowerCase();
-  const tiles = document.querySelectorAll('.pokemon-tile');
-  const footer = document.getElementById('footer');
-  const filteredPokemon = filterPokemon(searchTerm);
+	const searchTerm = searchInput.value.toLowerCase();
+	const tiles = document.querySelectorAll('.pokemon-tile');
+	const footer = document.getElementById('footer');
+	const filteredPokemon = filterPokemon(searchTerm);
 
-  updateSearchButton(searchTerm);
-  updateFooterVisibility(searchTerm, footer);
-  updatePokemonTileVisibility(tiles, filteredPokemon);
-  updateNoMatchesMessage(filteredPokemon.length);
+	updateSearchButton(searchTerm);
+	updateFooterVisibility(searchTerm, footer);
+	updatePokemonTileVisibility(tiles, filteredPokemon);
+	updateNoMatchesMessage(filteredPokemon.length);
 }
 
 /**
@@ -233,11 +233,11 @@ function searchPokemon() {
  * Returns array of matching pokemon
  */
 function filterPokemon(searchTerm) {
-  return pokemonData.filter(
-    (pokemon) =>
-      pokemon.name.toLowerCase().includes(searchTerm) ||
-      pokemon.id.toString().includes(searchTerm)
-  );
+	return pokemonData.filter(
+		(pokemon) =>
+			pokemon.name.toLowerCase().includes(searchTerm) ||
+			pokemon.id.toString().includes(searchTerm)
+	);
 }
 
 /**
@@ -246,13 +246,13 @@ function filterPokemon(searchTerm) {
  * Removes the 'outlined' class if there is no search term
  */
 function updateSearchButton(searchTerm) {
-  const searchBtn = document.getElementById('search-btn');
+	const searchBtn = document.getElementById('search-btn');
 
-  if (searchTerm !== '') {
-    searchBtn.classList.add('outlined');
-  } else {
-    searchBtn.classList.remove('outlined');
-  }
+	if (searchTerm !== '') {
+		searchBtn.classList.add('outlined');
+	} else {
+		searchBtn.classList.remove('outlined');
+	}
 }
 
 /**
@@ -261,11 +261,11 @@ function updateSearchButton(searchTerm) {
  * Shows the footer if there is no search term
  */
 function updateFooterVisibility(searchTerm, footer) {
-  if (searchTerm !== '') {
-    footer.classList.add('d-none');
-  } else {
-    footer.classList.remove('d-none');
-  }
+	if (searchTerm !== '') {
+		footer.classList.add('d-none');
+	} else {
+		footer.classList.remove('d-none');
+	}
 }
 
 /**
@@ -275,20 +275,20 @@ function updateFooterVisibility(searchTerm, footer) {
  * Toggles the 'd-none' class on the tile to show/hide it based on the matches
  */
 function updatePokemonTileVisibility(tiles, filteredPokemon) {
-  tiles.forEach((tile, index) => {
-    const pokemon = pokemonData[index];
-    const tileContent = tile.innerText.toLowerCase();
-    const isMatch = filteredPokemon.some((matchedPokemon) =>
-      tileContent.includes(matchedPokemon.name.toLowerCase())
-    );
+	tiles.forEach((tile, index) => {
+		const pokemon = pokemonData[index];
+		const tileContent = tile.innerText.toLowerCase();
+		const isMatch = filteredPokemon.some((matchedPokemon) =>
+			tileContent.includes(matchedPokemon.name.toLowerCase())
+		);
 
-    if (isFilteredView) {
-      const isLiked = pokemon.isLiked === 'true';
-      tile.classList.toggle('d-none', !isMatch || !isLiked);
-    } else {
-      tile.classList.toggle('d-none', !isMatch);
-    }
-  });
+		if (isFilteredView) {
+			const isLiked = pokemon.isLiked === 'true';
+			tile.classList.toggle('d-none', !isMatch || !isLiked);
+		} else {
+			tile.classList.toggle('d-none', !isMatch);
+		}
+	});
 }
 
 /**
@@ -297,21 +297,21 @@ function updatePokemonTileVisibility(tiles, filteredPokemon) {
  * Hides the 'no matches' message if there are any matches.
  */
 function updateNoMatchesMessage(matchCount) {
-  const noMatchesMessage = document.getElementById('no-matches');
+	const noMatchesMessage = document.getElementById('no-matches');
 
-  if (matchCount === 0) {
-    noMatchesMessage.classList.remove('d-none');
-  } else {
-    noMatchesMessage.classList.add('d-none');
-  }
+	if (matchCount === 0) {
+		noMatchesMessage.classList.remove('d-none');
+	} else {
+		noMatchesMessage.classList.add('d-none');
+	}
 }
 
 /**
  * Clears the search input field and runs  {@link searchPokemon} to reset the search
  */
 function clearSearch() {
-  searchInput.value = '';
-  searchPokemon();
+	searchInput.value = '';
+	searchPokemon();
 }
 
 /**
@@ -321,34 +321,34 @@ function clearSearch() {
  * Calls updateNoLikesMessage() to show/hide no likes message based on count
  */
 function toggleLikedPokemonVisibility() {
-  toggleLikedPokemonFilter();
-  updatePokemonTiles();
-  updateNoLikesMessage(likedPokemonsCount);
+	toggleLikedPokemonFilter();
+	updatePokemonTiles();
+	updateNoLikesMessage(likedPokemonsCount);
 }
 
 /**
  * toggles the filter for liked pokemons
  */
 function toggleLikedPokemonFilter() {
-  isFilteredView = !isFilteredView;
-  updateControlIcons();
-  clearSearch();
+	isFilteredView = !isFilteredView;
+	updateControlIcons();
+	clearSearch();
 }
 
 /**
  * updates the footer-appearance based on filter
  */
 function updateControlIcons() {
-  const footer = document.getElementById('footer');
-  const loveBtn = document.getElementById('love-button');
+	const footer = document.getElementById('footer');
+	const loveBtn = document.getElementById('love-button');
 
-  if (isFilteredView) {
-    loveBtn.classList.add('outlined');
-    footer.classList.add('d-none');
-  } else {
-    loveBtn.classList.remove('outlined');
-    footer.classList.remove('d-none');
-  }
+	if (isFilteredView) {
+		loveBtn.classList.add('outlined');
+		footer.classList.add('d-none');
+	} else {
+		loveBtn.classList.remove('outlined');
+		footer.classList.remove('d-none');
+	}
 }
 
 /**
@@ -358,19 +358,19 @@ function updateControlIcons() {
  * Shows all tiles if not filtering
  */
 function updatePokemonTiles() {
-  const tiles = document.querySelectorAll('.pokemon-tile');
+	const tiles = document.querySelectorAll('.pokemon-tile');
 
-  tiles.forEach((tile, index) => {
-    const pokemon = pokemonData[index];
-    tile.dataset.liked = pokemon.isLiked;
+	tiles.forEach((tile, index) => {
+		const pokemon = pokemonData[index];
+		tile.dataset.liked = pokemon.isLiked;
 
-    if (isFilteredView) {
-      const isLiked = pokemon.isLiked === 'true';
-      tile.classList.toggle('d-none', !isLiked);
-    } else {
-      tile.classList.remove('d-none');
-    }
-  });
+		if (isFilteredView) {
+			const isLiked = pokemon.isLiked === 'true';
+			tile.classList.toggle('d-none', !isLiked);
+		} else {
+			tile.classList.remove('d-none');
+		}
+	});
 }
 
 /**
@@ -378,10 +378,10 @@ function updatePokemonTiles() {
  * @param index - represents the index of the Pokemon in the `pokemonData` array
  */
 function toggleLike(index) {
-  updatePokemonLikeStatus(index);
-  updateTileLikeStatus(index);
-  updateTileVisibility(index);
-  updateNoLikesMessage(likedPokemonsCount);
+	updatePokemonLikeStatus(index);
+	updateTileLikeStatus(index);
+	updateTileVisibility(index);
+	updateNoLikesMessage(likedPokemonsCount);
 }
 
 /**
@@ -391,17 +391,17 @@ function toggleLike(index) {
  * Calls renderHeart() to update the UI heart for the Pokemon
  */
 function updatePokemonLikeStatus(index) {
-  let pokemon = pokemonData[index];
+	let pokemon = pokemonData[index];
 
-  if (pokemon.isLiked === 'true') {
-    pokemon.isLiked = 'false';
-    likedPokemonsCount--;
-  } else {
-    pokemon.isLiked = 'true';
-    likedPokemonsCount++;
-  }
-  targetID = pokemonData[index].id;
-  renderHeart(pokemon, targetID);
+	if (pokemon.isLiked === 'true') {
+		pokemon.isLiked = 'false';
+		likedPokemonsCount--;
+	} else {
+		pokemon.isLiked = 'true';
+		likedPokemonsCount++;
+	}
+	targetID = pokemonData[index].id;
+	renderHeart(pokemon, targetID);
 }
 
 /**
@@ -411,10 +411,10 @@ function updatePokemonLikeStatus(index) {
  * @param {number} index - The index of the Pokemon in pokemonData array
  */
 function updateTileLikeStatus(index) {
-  const tiles = document.querySelectorAll('.pokemon-tile');
-  tiles.forEach((tile, index) => {
-    tile.dataset.liked = pokemonData[index].isLiked;
-  });
+	const tiles = document.querySelectorAll('.pokemon-tile');
+	tiles.forEach((tile, index) => {
+		tile.dataset.liked = pokemonData[index].isLiked;
+	});
 }
 
 /**
@@ -424,10 +424,10 @@ function updateTileLikeStatus(index) {
  * @param {number} index - The index of the Pokemon in pokemonData
  */
 function updateTileVisibility(index) {
-  if (isFilteredView) {
-    const currentTile = document.getElementById(`pokemon-tile-${pokemon.id}`);
-    currentTile.classList.toggle('d-none');
-  }
+	if (isFilteredView) {
+		const currentTile = document.getElementById(`pokemon-tile-${pokemon.id}`);
+		currentTile.classList.toggle('d-none');
+	}
 }
 
 /**
@@ -436,18 +436,18 @@ function updateTileVisibility(index) {
  * @param likedPokemonsCount - represents the number of liked pokemons
  */
 function updateNoLikesMessage(likedPokemonsCount) {
-  const noLikesMessage = document.getElementById('no-likes');
-  if (isFilteredView && likedPokemonsCount === 0) {
-    noLikesMessage.classList.remove('d-none');
-  } else {
-    noLikesMessage.classList.add('d-none');
-  }
+	const noLikesMessage = document.getElementById('no-likes');
+	if (isFilteredView && likedPokemonsCount === 0) {
+		noLikesMessage.classList.remove('d-none');
+	} else {
+		noLikesMessage.classList.add('d-none');
+	}
 }
 
 /**
  * Scrolls the page to the top of the page
  */
 function scrollToTop() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
+	document.body.scrollTop = 0;
+	document.documentElement.scrollTop = 0;
 }

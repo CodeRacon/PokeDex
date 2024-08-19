@@ -9,18 +9,18 @@
  * assigns click handlers to each tile
  */
 async function renderPokemonTile(pokemonData) {
-  if (pokemonData.length > 24) {
-    pokemonData = pokemonData.slice(pokemonData.length - 24);
-  }
+	if (pokemonData.length > 12) {
+		pokemonData = pokemonData.slice(pokemonData.length - 12);
+	}
 
-  for (let i = 0; i < pokemonData.length; i++) {
-    pokemon = pokemonData[i];
-    typeColor = getTypeColor(pokemon.types[0]);
-    typeBadges = getTypeBadges(pokemon);
+	for (let i = 0; i < pokemonData.length; i++) {
+		pokemon = pokemonData[i];
+		typeColor = getTypeColor(pokemon.types[0]);
+		typeBadges = getTypeBadges(pokemon);
 
-    allPokemons.innerHTML += pokemonTileHTML(pokemon, typeBadges, typeColor);
-  }
-  addOnClicks();
+		allPokemons.innerHTML += pokemonTileHTML(pokemon, typeBadges, typeColor);
+	}
+	addOnClicks();
 }
 
 /**
@@ -30,7 +30,7 @@ async function renderPokemonTile(pokemonData) {
  * @returns {string} HTML string of badge buttons
  */
 function getTypeBadges(pokemon) {
-  return pokemon.types.map((type) => `<button>${type}</button>`).join('');
+	return pokemon.types.map((type) => `<button>${type}</button>`).join('');
 }
 
 /**
@@ -40,7 +40,7 @@ function getTypeBadges(pokemon) {
  * @returns {string} The comma-separated string of abilities
  */
 function getAbilitiesList(pokemon) {
-  return pokemon.abilities.map((ability) => `${ability}`).join(', ');
+	return pokemon.abilities.map((ability) => `${ability}`).join(', ');
 }
 
 /**
@@ -53,21 +53,21 @@ function getAbilitiesList(pokemon) {
  * @param {number} index - The index of the Pokemon in the data array
  */
 async function renderPokeCard(index) {
-  const cardContainer = document.getElementById('card');
-  pokemon = pokemonData[index];
-  let targetID = pokemonData[index].id;
-  const abilitiesList = getAbilitiesList(pokemon);
-  typeBadges = getTypeBadges(pokemon);
-  typeColor = getTypeColor(pokemon.types[0]);
-  cardContainer.innerHTML = pokeCardHTML(index, pokemon, typeColor, typeBadges);
-  renderHeart(pokemon, targetID);
-  renderInfoTab(pokemon, abilitiesList);
-  openCardAnimation();
+	const cardContainer = document.getElementById('card');
+	pokemon = pokemonData[index];
+	let targetID = pokemonData[index].id;
+	const abilitiesList = getAbilitiesList(pokemon);
+	typeBadges = getTypeBadges(pokemon);
+	typeColor = getTypeColor(pokemon.types[0]);
+	cardContainer.innerHTML = pokeCardHTML(index, pokemon, typeColor, typeBadges);
+	renderHeart(pokemon, targetID);
+	renderInfoTab(pokemon, abilitiesList);
+	openCardAnimation();
 
-  if (index === 0) {
-    const prevBtn = document.getElementById('prev');
-    prevBtn.classList.toggle('hidden');
-  }
+	if (index === 0) {
+		const prevBtn = document.getElementById('prev');
+		prevBtn.classList.toggle('hidden');
+	}
 }
 
 /**
@@ -84,21 +84,21 @@ async function renderPokeCard(index) {
  * @param {number} targetID - The ID of the Pokemon
  */
 function renderHeart(pokemon, targetID) {
-  let targetCard, targetTile;
-  targetCard = document.getElementById(`heart-symbol-card-${targetID}`);
-  targetTile = document.getElementById(`heart-symbol-tile-${targetID}`);
+	let targetCard, targetTile;
+	targetCard = document.getElementById(`heart-symbol-card-${targetID}`);
+	targetTile = document.getElementById(`heart-symbol-tile-${targetID}`);
 
-  if (pokemon.isLiked === 'true') {
-    likeSymbol = likedSVG;
-  } else if (pokemon.isLiked === 'false') {
-    likeSymbol = unlikedSVG;
-  }
-  if (targetCard) {
-    targetCard.innerHTML = likeSymbol;
-  }
-  if (targetTile) {
-    targetTile.innerHTML = likeSymbol;
-  }
+	if (pokemon.isLiked === 'true') {
+		likeSymbol = likedSVG;
+	} else if (pokemon.isLiked === 'false') {
+		likeSymbol = unlikedSVG;
+	}
+	if (targetCard) {
+		targetCard.innerHTML = likeSymbol;
+	}
+	if (targetTile) {
+		targetTile.innerHTML = likeSymbol;
+	}
 }
 
 /**
@@ -108,12 +108,12 @@ function renderHeart(pokemon, targetID) {
  * @param abilitiesList - array of abilities for the given Pokemon
  */
 function renderInfoTab(pokemon, abilitiesList) {
-  const tabContainer = document.getElementById('tab-container');
-  tabContainer.classList.toggle('fade-in');
-  tabContainer.innerHTML = infoTabHTML(pokemon, abilitiesList);
-  const currentCaller = document.getElementById('info-caller');
-  const otherCallers = ['stats-caller', 'moves-caller', 'evo-caller'];
-  markActiveTab(currentCaller, otherCallers);
+	const tabContainer = document.getElementById('tab-container');
+	tabContainer.classList.toggle('fade-in');
+	tabContainer.innerHTML = infoTabHTML(pokemon, abilitiesList);
+	const currentCaller = document.getElementById('info-caller');
+	const otherCallers = ['stats-caller', 'moves-caller', 'evo-caller'];
+	markActiveTab(currentCaller, otherCallers);
 }
 
 /**
@@ -122,12 +122,12 @@ function renderInfoTab(pokemon, abilitiesList) {
  * @param pokemon - short term for `pokemonData[i]`
  */
 function renderStatsTab(pokemon) {
-  const tabContainer = document.getElementById('tab-container');
-  tabContainer.classList.toggle('fade-in');
-  tabContainer.innerHTML = statsTabHTML(pokemon);
-  const currentCaller = document.getElementById('stats-caller');
-  const otherCallers = ['info-caller', 'moves-caller', 'evo-caller'];
-  markActiveTab(currentCaller, otherCallers);
+	const tabContainer = document.getElementById('tab-container');
+	tabContainer.classList.toggle('fade-in');
+	tabContainer.innerHTML = statsTabHTML(pokemon);
+	const currentCaller = document.getElementById('stats-caller');
+	const otherCallers = ['info-caller', 'moves-caller', 'evo-caller'];
+	markActiveTab(currentCaller, otherCallers);
 }
 
 /**
@@ -136,26 +136,26 @@ function renderStatsTab(pokemon) {
  * @param pokemon - short term for `pokemonData[i]`
  */
 function renderMovesTab(pokemon) {
-  const tabContainer = document.getElementById('tab-container');
-  tabContainer.classList.toggle('fade-in');
-  tabContainer.innerHTML = /*html*/ `
+	const tabContainer = document.getElementById('tab-container');
+	tabContainer.classList.toggle('fade-in');
+	tabContainer.innerHTML = /*html*/ `
     <div class="moves-container" id="moves-container">
       <span>The 15 best Moves of ${pokemon.name}</span>
     </div>  
 `;
-  for (let i = 0; i < pokemon.moves.length; i++) {
-    const moveName = pokemon.moves[i];
+	for (let i = 0; i < pokemon.moves.length; i++) {
+		const moveName = pokemon.moves[i];
 
-    const moveBtn = document.createElement('button');
-    moveBtn.textContent = moveName;
+		const moveBtn = document.createElement('button');
+		moveBtn.textContent = moveName;
 
-    const movesContainer = document.getElementById('moves-container');
-    movesContainer.appendChild(moveBtn);
+		const movesContainer = document.getElementById('moves-container');
+		movesContainer.appendChild(moveBtn);
 
-    const currentCaller = document.getElementById('moves-caller');
-    const otherCallers = ['stats-caller', 'info-caller', 'evo-caller'];
-    markActiveTab(currentCaller, otherCallers);
-  }
+		const currentCaller = document.getElementById('moves-caller');
+		const otherCallers = ['stats-caller', 'info-caller', 'evo-caller'];
+		markActiveTab(currentCaller, otherCallers);
+	}
 }
 
 /**
@@ -166,18 +166,18 @@ function renderMovesTab(pokemon) {
  * @param typeColor - background color, based on the fetched type-value of the Pokemon (grass, water, etc.)
  */
 async function renderEvoTab(pokemon, typeColor) {
-  const tabContainer = document.getElementById('tab-container');
-  tabContainer.classList.toggle('fade-in');
-  tabContainer.innerHTML = evoTabHTML(pokemon);
+	const tabContainer = document.getElementById('tab-container');
+	tabContainer.classList.toggle('fade-in');
+	tabContainer.innerHTML = evoTabHTML(pokemon);
 
-  for (let i = 0; i < pokemon.evolution.length; i++) {
-    const evoContainer = document.getElementById('evo-container');
-    const evoStageContainer = createEvoStageContainer(pokemon, i, typeColor);
-    evoContainer.appendChild(evoStageContainer);
-  }
-  const currentCaller = document.getElementById('evo-caller');
-  const otherCallers = ['info-caller', 'moves-caller', 'stats-caller'];
-  markActiveTab(currentCaller, otherCallers);
+	for (let i = 0; i < pokemon.evolution.length; i++) {
+		const evoContainer = document.getElementById('evo-container');
+		const evoStageContainer = createEvoStageContainer(pokemon, i, typeColor);
+		evoContainer.appendChild(evoStageContainer);
+	}
+	const currentCaller = document.getElementById('evo-caller');
+	const otherCallers = ['info-caller', 'moves-caller', 'stats-caller'];
+	markActiveTab(currentCaller, otherCallers);
 }
 
 /**
@@ -192,23 +192,23 @@ async function renderEvoTab(pokemon, typeColor) {
  * such as name, ID, and image.
  */
 function createEvoStageContainer(pokemon, index, typeColor) {
-  const evoElement = pokemon.evolution[index];
-  const evoId = pokemon.shortStageIDs[index].toString().padStart(4, '0');
+	const evoElement = pokemon.evolution[index];
+	const evoId = pokemon.shortStageIDs[index].toString().padStart(4, '0');
 
-  const evoStageContainer = document.createElement('div');
-  evoStageContainer.classList.add('evo-stage');
-  typeColor = getTypeColor(pokemon.types[0]);
-  evoStageContainer.style.background = `${typeColor}`;
+	const evoStageContainer = document.createElement('div');
+	evoStageContainer.classList.add('evo-stage');
+	typeColor = getTypeColor(pokemon.types[0]);
+	evoStageContainer.style.background = `${typeColor}`;
 
-  const evoName = createEvoHTML('span', 'evo-name', evoElement);
-  const evoLongID = createEvoHTML('span', 'evo-id', `#${evoId}`);
-  const evoImage = createEvoImage(pokemon.shortStageIDs[index]);
+	const evoName = createEvoHTML('span', 'evo-name', evoElement);
+	const evoLongID = createEvoHTML('span', 'evo-id', `#${evoId}`);
+	const evoImage = createEvoImage(pokemon.shortStageIDs[index]);
 
-  evoStageContainer.appendChild(evoName);
-  evoStageContainer.appendChild(evoImage);
-  evoStageContainer.appendChild(evoLongID);
+	evoStageContainer.appendChild(evoName);
+	evoStageContainer.appendChild(evoImage);
+	evoStageContainer.appendChild(evoLongID);
 
-  return evoStageContainer;
+	return evoStageContainer;
 }
 
 /**
@@ -219,10 +219,10 @@ function createEvoStageContainer(pokemon, index, typeColor) {
  * @returns a newly created HTML element with the specified tag, class name, and text content.
  */
 function createEvoHTML(tag, className, textContent) {
-  const element = document.createElement(tag);
-  element.classList.add(className);
-  element.textContent = textContent;
-  return element;
+	const element = document.createElement(tag);
+	element.classList.add(className);
+	element.textContent = textContent;
+	return element;
 }
 
 /**
@@ -232,9 +232,9 @@ function createEvoHTML(tag, className, textContent) {
  * @returns an HTML image element
  */
 function createEvoImage(shortStageID) {
-  const evoImage = document.createElement('img');
-  evoImage.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${shortStageID}.png`;
-  return evoImage;
+	const evoImage = document.createElement('img');
+	evoImage.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${shortStageID}.png`;
+	return evoImage;
 }
 
 /**
@@ -245,12 +245,12 @@ function createEvoImage(shortStageID) {
  * used to retrieve the specific Pokemon object from the array
  */
 async function nextCard(index) {
-  if (index === pokemonData.length - 1) {
-    await loadMore();
-    renderPokeCard(index + 1);
-  } else {
-    renderPokeCard(index + 1);
-  }
+	if (index === pokemonData.length - 1) {
+		await loadMore();
+		renderPokeCard(index + 1);
+	} else {
+		renderPokeCard(index + 1);
+	}
 }
 
 /**
@@ -259,7 +259,7 @@ async function nextCard(index) {
  * used to retrieve the specific Pokemon object from the array
  */
 function prevCard(index) {
-  renderPokeCard(index - 1);
+	renderPokeCard(index - 1);
 }
 
 /**
@@ -269,11 +269,11 @@ function prevCard(index) {
  * @param otherCallers - array of element IDs representing the other tabs that should be left "inactive"
  */
 function markActiveTab(currentCaller, otherCallers) {
-  currentCaller.classList.add('active');
-  otherCallers.forEach((elementId) => {
-    const element = document.getElementById(elementId);
-    element.classList.remove('active');
-  });
+	currentCaller.classList.add('active');
+	otherCallers.forEach((elementId) => {
+		const element = document.getElementById(elementId);
+		element.classList.remove('active');
+	});
 }
 
 /**
@@ -283,11 +283,11 @@ function markActiveTab(currentCaller, otherCallers) {
  * @returns ID of the Pokemon with the given `pokemonName`
  */
 function getPokemonIdByName(pokemonName) {
-  for (let i = 0; i < pokemonData.length; i++) {
-    if (pokemonData[i].name === pokemonName) {
-      return pokemonData[i].ID;
-    }
-  }
+	for (let i = 0; i < pokemonData.length; i++) {
+		if (pokemonData[i].name === pokemonName) {
+			return pokemonData[i].ID;
+		}
+	}
 }
 
 /**
@@ -295,14 +295,14 @@ function getPokemonIdByName(pokemonName) {
  * based on the pokemon's liked status
  */
 function addOnClicks() {
-  const tiles = document.querySelectorAll('.pokemon-tile');
+	const tiles = document.querySelectorAll('.pokemon-tile');
 
-  tiles.forEach((tile, index) => {
-    const pokemon = pokemonData[index];
+	tiles.forEach((tile, index) => {
+		const pokemon = pokemonData[index];
 
-    tile.dataset.liked = pokemon.isLiked;
-    let targetID = pokemonData[index].id;
+		tile.dataset.liked = pokemon.isLiked;
+		let targetID = pokemonData[index].id;
 
-    renderHeart(pokemon, targetID);
-  });
+		renderHeart(pokemon, targetID);
+	});
 }
