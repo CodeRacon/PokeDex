@@ -201,9 +201,7 @@ h1 {
 
 .search-btn input:active .search-btn {
   outline: solid var(--text-white) 0.5px;
-  /* width: 13.5rem; */
   justify-content: flex-start;
-  /* padding: 0 1rem; */
 }
 
 #love-button {

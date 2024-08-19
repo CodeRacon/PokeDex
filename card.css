@@ -273,7 +273,7 @@ span.card-name {
   border-radius: 0.25rem;
   width: 100%;
   opacity: 0;
-  animation: progress 0.35s ease-in-out forwards;
+  animation: progressBar 0.35s ease-in-out forwards;
 }
 
 #attack {
@@ -300,7 +300,7 @@ span.card-name {
   animation-delay: 90ms;
 }
 
-@keyframes progress {
+@keyframes progressBar {
   0% {
     width: 0%;
     opacity: 0;
